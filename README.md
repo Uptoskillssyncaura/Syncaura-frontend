@@ -26,6 +26,7 @@ FRONTEND/
 │   ├── components/        # Reusable UI components
 │   │   ├── auth/          # Authentication components (SignIn, SignUp)
 │   │   ├── dashboard/     # Admin dashboard components
+│   │   ├── Meeting/       # Meeting components
 │   │   └── userdashboard/ # User dashboard components
 │   │
 │   ├── layouts/           # Layout components
@@ -61,9 +62,10 @@ FRONTEND/
 ---
 
 ## Routes
-* "/" => **Normal dashboard**
-* "/sign-up" => **Sign-Up**
-* "/user-dashboard" => **User dashboard**
+* "/" => **Normal dashboard Page**
+* "/sign-up" => **Sign-Up Page**
+* "/user-dashboard" => **User dashboard Page**
+* "/meetings" => **Meeting Page**
 
 ## 🧩 Features Overview
 
