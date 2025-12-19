@@ -117,7 +117,7 @@ export default function Meetings() {
           {/* Action Buttons */}
           <div className="flex flex-wrap sm:flex-nowrap items-center gap-4 justify-end flex-1">
             <div className="flex items-center gap-2 justify-center px-3 sm:px-4 py-2 rounded-2xl shadow-[0_3px_10px_0_rgba(0,0,0,0.25)] dark:bg-[#383838]">
-              <RefreshCcw size={15} className="text-[#000000] dark:text-[#656565]" />
+              <RefreshCcw size={15} className="text-[#000000] dark:text-[#acaaaa]" />
               <p className="text-sm font-medium text-[#000000] dark:text-[#D5D5D5]">Sync Calendar</p>
             </div>
             <div
@@ -150,7 +150,7 @@ export default function Meetings() {
                 <input
                   type="text"
                   placeholder="Search meetings, documents..."
-                  className="w-full text-sm placeholder:text-xs sm:placeholder:text-sm bg-transparent dark:placeholder:text-[#D5D5D5] outline-none border-none text-black pl-3"
+                  className="w-full text-sm text-[#393838] dark:text-[#D2D2D2] placeholder:text-xs sm:placeholder:text-sm bg-transparent dark:placeholder:text-[#D5D5D5] outline-none border-none  pl-3"
                 />
               </div>
             </div>
