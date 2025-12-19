@@ -138,3 +138,24 @@
 
 }
 
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
+
+.animate-float {
+  animation: float 12s ease-in-out infinite;
+}
+
+/* Container scrollable but scrollbar hidden */
+.sidebar-chat-list {
+  overflow-y: scroll;       /* enable vertical scrolling */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;    /* Firefox */
+}
+
+.sidebar-chat-list::-webkit-scrollbar {
+  display: none;            /* Chrome, Safari, Edge */
+}

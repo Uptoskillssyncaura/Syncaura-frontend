@@ -1,0 +1,582 @@
+export const CHATS = [
+  {
+    id: 1,
+    name: "John Dev",
+    last: "Hey bro, you free ah?",
+    time: "12:00",
+    avatar: "J",
+    unread: 3,
+    gradient: "from-blue-400 to-blue-700",
+
+    profile: {
+      name: "John Dev",
+      post: "Frontend Engineer @ FlowBit",
+      gredient: "from-blue-400 to-blue-700",
+    },
+    chatDetails: {
+      status: "Open",
+      assignedTo: "John Dev",
+      localTime: "10:35 AM (PST)",
+      location: "San Francisco, CA",
+    },
+    files: [
+      { name: "ui_notes.txt", size: "1.2 MB", date: "Dec 10" },
+      { name: "components.png", size: "820 KB", date: "Dec 09" },
+    ],
+  },
+
+  {
+    id: 2,
+    name: "Aarav M",
+    last: "Good morning!",
+    time: "Dec 12",
+    avatar: "A",
+    unread: 0,
+    gradient: "from-purple-400 to-purple-700",
+
+    profile: {
+      name: "Aarav M",
+      post: "Backend Developer",
+      gredient: "from-purple-400 to-purple-700",
+    },
+    chatDetails: {
+      status: "Closed",
+      assignedTo: "Aarav M",
+      localTime: "09:10 AM (IST)",
+      location: "Bangalore, India",
+    },
+    files: [{ name: "api_schema.json", size: "900 KB", date: "Dec 11" }],
+  },
+
+  {
+    id: 3,
+    name: "Sneha R",
+    last: "Hey, quick question…",
+    time: "Dec 15",
+    avatar: "S",
+    unread: 5,
+    gradient: "from-pink-400 to-pink-700",
+
+    profile: {
+      name: "Sneha R",
+      post: "UI/UX Designer",
+      gredient: "from-pink-400 to-pink-700",
+    },
+    chatDetails: {
+      status: "Open",
+      assignedTo: "Sneha R",
+      localTime: "11:45 AM (IST)",
+      location: "Pune, India",
+    },
+    files: [
+      { name: "wireframe.fig", size: "2.8 MB", date: "Dec 14" },
+      { name: "colors.pdf", size: "620 KB", date: "Dec 13" },
+    ],
+  },
+
+  {
+    id: 4,
+    name: "Karthik S",
+    last: "Hi, I've uploaded the file",
+    time: "Nov 3",
+    avatar: "K",
+    unread: 1,
+    gradient: "from-emerald-400 to-emerald-700",
+
+    profile: {
+      name: "Karthik S",
+      post: "DevOps Engineer",
+      gredient: "from-emerald-400 to-emerald-700",
+    },
+    chatDetails: {
+      status: "Open",
+      assignedTo: "Karthik S",
+      localTime: "08:30 PM (IST)",
+      location: "Hyderabad, India",
+    },
+    files: [{ name: "deployment.yml", size: "450 KB", date: "Nov 02" }],
+  },
+
+  {
+    id: 5,
+    name: "Ananya P",
+    last: "Can we meet today?",
+    time: "Nov 5",
+    avatar: "A",
+    unread: 2,
+    gradient: "from-blue-400 to-blue-700",
+
+    profile: {
+      name: "Ananya P",
+      post: "Product Owner",
+      gredient: "from-blue-400 to-blue-700",
+    },
+    chatDetails: {
+      status: "Open",
+      assignedTo: "Ananya P",
+      localTime: "02:15 PM (IST)",
+      location: "Mumbai, India",
+    },
+    files: [{ name: "roadmap.pdf", size: "1.9 MB", date: "Nov 04" }],
+  },
+
+  {
+    id: 6,
+    name: "Rohit K",
+    last: "Sent you the documents.",
+    time: "Nov 6",
+    avatar: "R",
+    unread: 0,
+    gradient: "from-purple-400 to-purple-700",
+
+    profile: {
+      name: "Rohit K",
+      post: "Business Analyst",
+      gredient: "from-purple-400 to-purple-700",
+    },
+    chatDetails: {
+      status: "Closed",
+      assignedTo: "Rohit K",
+      localTime: "06:40 PM (IST)",
+      location: "Delhi, India",
+    },
+    files: [{ name: "analysis.xlsx", size: "1.3 MB", date: "Nov 05" }],
+  },
+
+  {
+    id: 7,
+    name: "Priya L",
+    last: "Thanks for your help!",
+    time: "Nov 7",
+    avatar: "P",
+    unread: 4,
+    gradient: "from-pink-400 to-pink-700",
+
+    profile: {
+      name: "Priya L",
+      post: "QA Engineer",
+      gredient: "from-pink-400 to-pink-700",
+    },
+    chatDetails: {
+      status: "Open",
+      assignedTo: "Priya L",
+      localTime: "04:55 PM (IST)",
+      location: "Chennai, India",
+    },
+    files: [{ name: "bug_report.docx", size: "780 KB", date: "Nov 06" }],
+  },
+
+  {
+    id: 8,
+    name: "Vikram S",
+    last: "Let's catch up soon.",
+    time: "Nov 8",
+    avatar: "V",
+    unread: 0,
+    gradient: "from-emerald-400 to-emerald-700",
+
+    profile: {
+      name: "Vikram S",
+      post: "Tech Lead",
+      gredient: "from-emerald-400 to-emerald-700",
+    },
+    chatDetails: {
+      status: "Closed",
+      assignedTo: "Vikram S",
+      localTime: "09:20 PM (IST)",
+      location: "Noida, India",
+    },
+    files: [],
+  },
+
+  {
+    id: 9,
+    name: "Neha M",
+    last: "Call me when free.",
+    time: "Nov 9",
+    avatar: "N",
+    unread: 1,
+    gradient: "from-blue-400 to-blue-700",
+
+    profile: {
+      name: "Neha M",
+      post: "HR Manager",
+      gredient: "from-blue-400 to-blue-700",
+    },
+    chatDetails: {
+      status: "Open",
+      assignedTo: "Neha M",
+      localTime: "01:30 PM (IST)",
+      location: "Gurgaon, India",
+    },
+    files: [{ name: "policy.pdf", size: "540 KB", date: "Nov 08" }],
+  },
+
+  {
+    id: 10,
+    name: "Amit R",
+    last: "Working on the project.",
+    time: "Nov 10",
+    avatar: "A",
+    unread: 0,
+    gradient: "from-purple-400 to-purple-700",
+
+    profile: {
+      name: "Amit R",
+      post: "Full Stack Developer",
+      gredient: "from-purple-400 to-purple-700",
+    },
+    chatDetails: {
+      status: "Closed",
+      assignedTo: "Amit R",
+      localTime: "07:00 PM (IST)",
+      location: "Indore, India",
+    },
+    files: [{ name: "feature_list.md", size: "310 KB", date: "Nov 09" }],
+  },
+
+  {
+    id: 11,
+    name: "Shreya D",
+    last: "Good night!",
+    time: "Nov 11",
+    avatar: "S",
+    unread: 3,
+    gradient: "from-pink-400 to-pink-700",
+
+    profile: {
+      name: "Shreya D",
+      post: "Content Strategist",
+      gredient: "from-pink-400 to-pink-700",
+    },
+    chatDetails: {
+      status: "Open",
+      assignedTo: "Shreya D",
+      localTime: "11:55 PM (IST)",
+      location: "Jaipur, India",
+    },
+    files: [{ name: "content_plan.docx", size: "650 KB", date: "Nov 10" }],
+  },
+
+  {
+    id: 12,
+    name: "Rahul P",
+    last: "Let's finalize this.",
+    time: "Nov 12",
+    avatar: "R",
+    unread: 0,
+    gradient: "from-emerald-400 to-emerald-700",
+
+    profile: {
+      name: "Rahul P",
+      post: "Project Manager",
+      gredient: "from-emerald-400 to-emerald-700",
+    },
+    chatDetails: {
+      status: "Closed",
+      assignedTo: "Rahul P",
+      localTime: "03:00 PM (IST)",
+      location: "Ahmedabad, India",
+    },
+    files: [{ name: "timeline.xlsx", size: "1.5 MB", date: "Nov 11" }],
+  },
+
+  {
+    id: 13,
+    name: "Isha K",
+    last: "See you tomorrow.",
+    time: "Nov 13",
+    avatar: "I",
+    unread: 2,
+    gradient: "from-blue-400 to-blue-700",
+
+    profile: {
+      name: "Isha K",
+      post: "Marketing Executive",
+      gredient: "from-blue-400 to-blue-700",
+    },
+    chatDetails: {
+      status: "Open",
+      assignedTo: "Isha K",
+      localTime: "05:45 PM (IST)",
+      location: "Kolkata, India",
+    },
+    files: [{ name: "campaign.pdf", size: "2.1 MB", date: "Nov 12" }],
+  },
+
+  {
+    id: 14,
+    name: "Manish T",
+    last: "Where are you?",
+    time: "Nov 14",
+    avatar: "M",
+    unread: 1,
+    gradient: "from-purple-400 to-purple-700",
+
+    profile: {
+      name: "Manish T",
+      post: "Sales Lead",
+      gredient: "from-purple-400 to-purple-700",
+    },
+    chatDetails: {
+      status: "Open",
+      assignedTo: "Manish T",
+      localTime: "06:10 PM (IST)",
+      location: "Surat, India",
+    },
+    files: [],
+  },
+
+  {
+    id: 15,
+    name: "Tanya S",
+    last: "Sent the files.",
+    time: "Nov 15",
+    avatar: "T",
+    unread: 0,
+    gradient: "from-pink-400 to-pink-700",
+
+    profile: {
+      name: "Tanya S",
+      post: "Graphic Designer",
+      gredient: "from-pink-400 to-pink-700",
+    },
+    chatDetails: {
+      status: "Closed",
+      assignedTo: "Tanya S",
+      localTime: "12:40 PM (IST)",
+      location: "Udaipur, India",
+    },
+    files: [{ name: "branding.psd", size: "5.2 MB", date: "Nov 14" }],
+  },
+
+  {
+    id: 16,
+    name: "Kunal R",
+    last: "Thanks for the update.",
+    time: "Nov 16",
+    avatar: "K",
+    unread: 0,
+    gradient: "from-emerald-400 to-emerald-700",
+
+    profile: {
+      name: "Kunal R",
+      post: "Support Engineer",
+      gredient: "from-emerald-400 to-emerald-700",
+    },
+    chatDetails: {
+      status: "Closed",
+      assignedTo: "Kunal R",
+      localTime: "10:20 AM (IST)",
+      location: "Nagpur, India",
+    },
+    files: [],
+  },
+
+  {
+    id: 17,
+    name: "Divya P",
+    last: "I'll join in 5 min.",
+    time: "Nov 17",
+    avatar: "D",
+    unread: 3,
+    gradient: "from-blue-400 to-blue-700",
+
+    profile: {
+      name: "Divya P",
+      post: "Scrum Master",
+      gredient: "from-blue-400 to-blue-700",
+    },
+    chatDetails: {
+      status: "Open",
+      assignedTo: "Divya P",
+      localTime: "04:00 PM (IST)",
+      location: "Coimbatore, India",
+    },
+    files: [{ name: "standup_notes.txt", size: "210 KB", date: "Nov 16" }],
+  },
+
+  {
+    id: 18,
+    name: "Siddharth M",
+    last: "Meeting postponed.",
+    time: "Nov 18",
+    avatar: "S",
+    unread: 0,
+    gradient: "from-purple-400 to-purple-700",
+
+    profile: {
+      name: "Siddharth M",
+      post: "Operations Manager",
+      gredient: "from-purple-400 to-purple-700",
+    },
+    chatDetails: {
+      status: "Closed",
+      assignedTo: "Siddharth M",
+      localTime: "09:30 AM (IST)",
+      location: "Bhopal, India",
+    },
+    files: [],
+  },
+
+  {
+    id: 19,
+    name: "Aisha R",
+    last: "See you at 6 pm.",
+    time: "Nov 19",
+    avatar: "A",
+    unread: 2,
+    gradient: "from-pink-400 to-pink-700",
+
+    profile: {
+      name: "Aisha R",
+      post: "Customer Success",
+      gredient: "from-pink-400 to-pink-700",
+    },
+    chatDetails: {
+      status: "Open",
+      assignedTo: "Aisha R",
+      localTime: "05:55 PM (IST)",
+      location: "Kochi, India",
+    },
+    files: [{ name: "client_notes.docx", size: "400 KB", date: "Nov 18" }],
+  },
+
+  {
+    id: 20,
+    name: "Harsh V",
+    last: "Please review this.",
+    time: "Nov 20",
+    avatar: "H",
+    unread: 0,
+    gradient: "from-emerald-400 to-emerald-700",
+
+    profile: {
+      name: "Harsh V",
+      post: "Code Reviewer",
+      gredient: "from-emerald-400 to-emerald-700",
+    },
+    chatDetails: {
+      status: "Closed",
+      assignedTo: "Harsh V",
+      localTime: "08:10 PM (IST)",
+      location: "Vadodara, India",
+    },
+    files: [{ name: "review_comments.md", size: "180 KB", date: "Nov 19" }],
+  },
+
+  {
+    id: 21,
+    name: "Simran D",
+    last: "Awesome work!",
+    time: "Nov 21",
+    avatar: "S",
+    unread: 1,
+    gradient: "from-blue-400 to-blue-700",
+
+    profile: {
+      name: "Simran D",
+      post: "Talent Acquisition",
+      gredient: "from-blue-400 to-blue-700",
+    },
+    chatDetails: {
+      status: "Open",
+      assignedTo: "Simran D",
+      localTime: "11:20 AM (IST)",
+      location: "Chandigarh, India",
+    },
+    files: [],
+  },
+
+  {
+    id: 22,
+    name: "Nikhil P",
+    last: "I'll call you later.",
+    time: "Nov 22",
+    avatar: "N",
+    unread: 0,
+    gradient: "from-purple-400 to-purple-700",
+
+    profile: {
+      name: "Nikhil P",
+      post: "Data Analyst",
+      gredient: "from-purple-400 to-purple-700",
+    },
+    chatDetails: {
+      status: "Closed",
+      assignedTo: "Nikhil P",
+      localTime: "07:45 PM (IST)",
+      location: "Trichy, India",
+    },
+    files: [{ name: "metrics.csv", size: "720 KB", date: "Nov 21" }],
+  },
+
+  {
+    id: 23,
+    name: "Meera K",
+    last: "Got it, thanks!",
+    time: "Nov 23",
+    avatar: "M",
+    unread: 2,
+    gradient: "from-pink-400 to-pink-700",
+
+    profile: {
+      name: "Meera K",
+      post: "Finance Executive",
+      gredient: "from-pink-400 to-pink-700",
+    },
+    chatDetails: {
+      status: "Open",
+      assignedTo: "Meera K",
+      localTime: "03:35 PM (IST)",
+      location: "Ujjain, India",
+    },
+    files: [{ name: "invoice.pdf", size: "510 KB", date: "Nov 22" }],
+  },
+
+  {
+    id: 24,
+    name: "Aditya R",
+    last: "Let's start the task.",
+    time: "Nov 24",
+    avatar: "A",
+    unread: 0,
+    gradient: "from-emerald-400 to-emerald-700",
+
+    profile: {
+      name: "Aditya R",
+      post: "Engineering Manager",
+      gredient: "from-emerald-400 to-emerald-700",
+    },
+    chatDetails: {
+      status: "Closed",
+      assignedTo: "Aditya R",
+      localTime: "09:00 AM (IST)",
+      location: "Mysore, India",
+    },
+    files: [],
+  },
+
+  {
+    id: 25,
+    name: "Ritika S",
+    last: "Will send update soon.",
+    time: "Nov 25",
+    avatar: "R",
+    unread: 2,
+    gradient: "from-blue-400 to-blue-700",
+
+    profile: {
+      name: "Ritika S",
+      post: "Operations Coordinator",
+      gredient: "from-blue-400 to-blue-700",
+    },
+    chatDetails: {
+      status: "Open",
+      assignedTo: "Ritika S",
+      localTime: "01:15 PM (IST)",
+      location: "Lucknow, India",
+    },
+    files: [{ name: "ops_checklist.docx", size: "430 KB", date: "Nov 24" }],
+  },
+];

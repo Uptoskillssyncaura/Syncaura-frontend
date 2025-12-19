@@ -22,13 +22,17 @@ FRONTEND/
 │
 ├── src/
 │   ├── assets/            # Icons, images, and other static assets
-│   │MobileSidebar.jsx
+│   │
 │   ├── components/        # Reusable UI components
 │   │   ├── auth/          # Authentication components (SignIn, SignUp)
+│   │   ├── chats/         # Chat components
 │   │   ├── dashboard/     # Admin dashboard components
 │   │   ├── Meeting/       # Meeting components
 │   │   ├── userdashboard/ # User dashboard components
-│   │   └── MobileSidebar.jsx
+│   │   └── MobileSidebar.jsx 
+│   │ 
+│   ├── constant/          # constant reusable folder
+│   │   └── constant.js    # constant data
 │   │ 
 │   ├── layouts/           # Layout components
 │   │   └── MainLayout.jsx # Common layout wrapper (Header, Sidebar)
@@ -67,6 +71,7 @@ FRONTEND/
 * "/sign-up" => **Sign-Up Page**
 * "/user-dashboard" => **User dashboard Page**
 * "/meetings" => **Meeting Page**
+* "/chat" => **Chat Page**
 
 ## 🧩 Features Overview
 

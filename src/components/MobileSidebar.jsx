@@ -104,7 +104,8 @@ export default function MobileSidebar({ open, setOpen }) {
                     <div className="h-px w-full bg-[#E0DDDD] dark:bg-[#575757]" />
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                            <div className="w-9 h-9 rounded-full bg-red-500 text-white flex items-center justify-center font-semibold">
+                            <div className="w-9 h-9 rounded-full bg-linear-to-b from-red-600 to-red-900
+ text-white flex items-center justify-center font-semibold">
                                 J
                             </div>
                             <div>
