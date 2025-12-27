@@ -141,30 +141,32 @@ export default function MeetingCard({
         </div>
       </div>
 
-      <h3 className="
+      <div className="w-full flex flex-col gap-1 h-23">
+        <h3 className="
   font-semibold
   text-lg sm:text-xl 2xl:text-2xl
   leading-snug
   text-gray-900 dark:text-[#F5F5F5]
   line-clamp-2
 ">
-        {title}
-      </h3>
+          {title}
+        </h3>
 
 
-      {/* Time */}
-      <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 dark:text-[#F5F5F5]">
-        <span className="size-4 sm:size-5 flex items-center justify-center">
-          <img
-            src={
-              isDark
-                ? "/images/Meeting/dark/clock.png"
-                : "/images/Meeting/clock.png"
-            }
-            alt="clock"
-          />
-        </span>
-        <p>{formatMeetingTime(startTime, endTime)}</p>
+        {/* Time */}
+        <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 dark:text-[#F5F5F5]">
+          <span className="size-4 sm:size-5 flex items-center justify-center">
+            <img
+              src={
+                isDark
+                  ? "/images/Meeting/dark/clock.png"
+                  : "/images/Meeting/clock.png"
+              }
+              alt="clock"
+            />
+          </span>
+          <p>{formatMeetingTime(startTime, endTime)}</p>
+        </div>
       </div>
 
       {/* Avatars */}
@@ -212,7 +214,7 @@ export default function MeetingCard({
             ? "Completed"
             : isUpcoming
               ? <div div className="flex items-center justify-center gap-5 ">
-               <ArrowRight className="size-5 dark:text-[#73FBFD]" /> <span>Details</span>
+                <ArrowRight className="size-5 dark:text-[#73FBFD]" /> <span>Details</span>
               </div>
               : "Join Now"}
         </button>
