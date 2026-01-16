@@ -1,29 +1,32 @@
+import { Plus, FileText, Users, Calendar } from "lucide-react";
 
-const QuickActions = ({actions}) => {
+const actions = [
+  { id: "new-project", label: "New Project", icon: Plus, color: "bg-stat-blue" },
+  { id: "create-task", label: "Create Task", icon: FileText, color: "bg-stat-green" },
+  { id: "invite-team", label: "Invite Team", icon: Users, color: "bg-stat-orange" },
+  { id: "schedule", label: "Schedule", icon: Calendar, color: "bg-stat-purple" },
+];
+
+const QuickActions = () => {
   return (
-    <div
-      className="w-full flex items-center justify-around px-5 2xl:px-17 pb-5 pt-6 xl:pb-7 xl:pt-8 rounded-md
-      shadow-[0_6px_6px_2px_rgba(0,0,0,0.55),0_-1px_0px_0px_rgba(0,0,0,0.15)]
-      bg-white dark:bg-[#1A1B1E] transition-all duration-300"
-    >
-      {actions.map((item, index) => (
-        <div
-          key={index}
-          className="flex flex-col items-center justify-center gap-2 cursor-pointer"
-        >
-          <img
-            src={item.icon}
-            alt={item.label}
-            className="object-contain size-5 xl:size-7.5"
-          />
-          <p
-            style={{ fontFamily: "Poppins" }}
-            className="text-[9px] xl:text-xs text-gray-500 dark:text-gray-400 font-semibold"
-          >
-            {item.label}
-          </p>
-        </div>
-      ))}
+    <div className="chart-container">
+      <h3 className="text-sm font-semibold text-foreground mb-4">Quick Actions</h3>
+      <div className="grid grid-cols-2 gap-3">
+        {actions.map((action) => {
+          const Icon = action.icon;
+          return (
+            <button
+              key={action.id}
+              className="flex items-center gap-3 p-3 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors text-left"
+            >
+              <div className={`p-2 rounded-lg ${action.color} text-primary-foreground`}>
+                <Icon className="w-4 h-4" />
+              </div>
+              <span className="text-sm font-medium text-foreground">{action.label}</span>
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 };

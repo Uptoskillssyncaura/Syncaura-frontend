@@ -1,39 +1,79 @@
+import { Clock } from "lucide-react";
 
-import {  FiPlusCircle } from "react-icons/fi";
-
-export default function DashboardHeader({active, setActive}) {
-  const tabs = ["Dashboard", "All Projects", "Schedule", "Meeting", "Activity", "Members"];
- 
-
+const DashboardHeader = () => {
   return (
-    <div className=" flex  items-center justify-between px-5 mr-1 xl:mr-5 2xl:px-10 py-2">
+    <div
+      className="
+        flex items-center justify-between
+        mb-8
 
+        /* 🔥 FIGMA SPACING FIX */
+        mt-[20px]        /* move dashboard DOWN */
+        ml-[30px]        /* move away from sidebar */
+        mr-[32px]
+      "
+    >
+      {/* LEFT */}
+      <div>
+        <h1
+          className="
+            font-poppins
+            text-[28px]
+            font-bold
+            leading-[100%]
+            text-[#020617]
+            dark:text-[#F1F5F9]
+          "
+        >
+          Dashboard Overview
+        </h1>
 
-      <h2 className=" text-sm xl:text-base  font-bold text-[#8833FF]">
-        Dashboard Projects
-      </h2>
-
-      <div className="flex items-center bg-white transition-colors duration-550 dark:bg-[#000000] shadow-[0_4px_4px_0_rgba(0,0,0,0.25),0_0px_4px_0_rgba(0,0,0,0.15)]   rounded-full px-3 xl:px-6 py-2 gap-4 xl:gap-6">
-        {tabs.map((tab) => (
-          <button
-          onClick={()=>setActive(tab)}
-            key={tab}
-            className={`text-xs xl:text-sm  transition font-semibold ${
-              tab === active
-                ? "text-[#8833FF] font-bold"
-                : "text-gray-400 hover:text-[#c39bfa]"
-            }`}
-          >
-            {tab}
-          </button>
-        ))}
+        <p
+          className="
+            mt-[18px]
+            font-poppins
+            text-[17px]
+            font-semibold
+            leading-[100%]
+            text-[#94A3B8]
+          "
+        >
+          Welcome back, here&apos;s what&apos;s happening today.
+        </p>
       </div>
 
-      {/* RIGHT — Button */}
-      <button className="flex gap-1 xl:gap-3 text-gray-400 fill-gray-500 items-center">
-        <div><FiPlusCircle className="text-white dark:text-[#1A1B1E] fill-[#C3CAD9] dark:fill-[#C3CAD9] size-4 xl:size-6"/></div>
-        <p style={{fontFamily: "Poppins"}} className="text-gray-500 dark:text-[#7D8FB3] text-[9px] xl:text-xs font-bold">Add New Project</p>
-      </button>
+      {/* RIGHT: LAST UPDATED BOX */}
+      <div
+        className="
+          w-[238px] h-[42px]
+          flex items-center gap-2
+          px-[14px] -mr-2 mt-5
+          rounded-[7px]
+          bg-white
+          dark:bg-[#1E293B]
+
+          border border-black/5
+          dark:border-white/10
+        "
+      >
+        <span
+          className="
+            font-poppins
+           
+            text-[11px]
+            font-semibold
+            leading-[100%]
+            text-[#64748B]
+            whitespace-nowrap
+          "
+        >
+          Last updated: Just now
+        </span>
+
+        <Clock className="w-4 h-4 text-[#64748B] ml-auto" />
+      </div>
     </div>
   );
-}
+};
+
+export default DashboardHeader;

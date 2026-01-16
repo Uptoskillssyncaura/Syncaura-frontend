@@ -1,4 +1,4 @@
-import { Funnel, Plus, RefreshCcw } from "lucide-react";
+import { Filter, Plus, RefreshCcw } from "lucide-react";
 import { FaSearch } from "react-icons/fa";
 import MeetingCard from "../components/Meeting/Main/Card/MeetingCard";
 import { useState, useMemo } from "react";
@@ -139,7 +139,7 @@ export default function Meetings() {
           <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 justify-center sm:justify-end w-full sm:w-auto">
             {/* Filter Button */}
             <div className="bg-[#EDEDED] dark:bg-[#383838] rounded-3xl px-3 py-2 flex gap-2 items-center">
-              <Funnel size={20} className="text-[#393838] dark:text-[#D2D2D2]" />
+              <Filter size={20} className="text-[#393838] dark:text-[#D2D2D2]" />
               <p className="text-sm text-[#393838] dark:text-[#D2D2D2]">Filter</p>
             </div>
 

@@ -1,76 +1,77 @@
-import { Ellipsis, Search } from "lucide-react";
+import { Search, Bell, User } from "lucide-react";
 import ToggleSwitch from "./ToggleSwitch";
-import { FaBell } from "react-icons/fa";
-import { MdMessage } from "react-icons/md";
-import { FaUserGroup } from "react-icons/fa6";
-import { HiChartSquareBar } from "react-icons/hi";
 
-const DotGrid = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-    {[0, 8, 16].map((y) =>
-      [0, 8, 16].map((x) => (
-        <rect
-          key={`${x}-${y}`}
-          x={x + 3}
-          y={y + 3}
-          width="4"
-          height="4"
-          rx="1"
-          className="fill-gray-400 "
-        />
-      ))
-    )}
-  </svg>
-);
-
-const Header = ({currTab, show, setShow}) => {
+const Header = () => {
   return (
-    <div className="header-layout">
-      <div className="flex gap-3 xl:gap-9 items-center col-span-3">
-        <div className="shadow-custom " onClick={()=>setShow((prev)=>!prev)}>
-          <DotGrid />
+    <header
+      className="
+        flex items-center justify-between
+        h-[86px]
+        px-6
+        bg-white dark:bg-[#0E1628]
+        border-b border-[#E5E7EB] dark:border-[#1E293B]
+      "
+    >
+      {/* SEARCH */}
+      <div className="flex items-center max-w-[360px] w-full">
+        <div className="relative w-full">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B]" />
+          <input
+            type="text"
+            placeholder="Search projects, tasks, documents..."
+            className="
+              w-full h-[53px]
+              pl-11 pr-4
+              rounded-[5px]
+              bg-[#F1F5F9] dark:bg-[#1E293B]
+              text-sm
+              placeholder:text-[#64748B]
+              focus:outline-none
+            "
+          />
         </div>
-        <h1
-          style={{ fontFamily: "Poppins" }}
-          className=" tracking-[4px] text-lg xl:text-2xl font-extralight text-gray-500 dark:text-gray-400"
-        >
-          FLOWBIT
-        </h1>
       </div>
-      <div className="flex justify-center gap-3 xl:gap-9 items-center col-span-3">
-        <h2 className="text-sm font-bold text-[#8833FF]">{currTab}</h2>
-        <div>
-          <Ellipsis className="text-gray-400 dark:text-gray-200" />
-        </div>
-      </div>
-      <div
-        class="flex col-span-5 items-center  gap-x-2 bg-gray-200/10 
-            shadow-[0_4px_4px_0_rgba(0,0,0,0.25),0_0px_4px_0_rgba(0,0,0,0.15)] 
-             px-4 xl:px-10  rounded-3xl h-10 "
-      >
-        <input
-          type="text"
-          placeholder="Try Searching <<New Pages today>>"
-          className="flex-1 outline-none text-gray-700 dark:text-gray-300 text-sm font-semibold placeholder:text-xs placeholder:font-bold"
-        />
-        <Search className="size-5 text-gray-500" />
-      </div>
-      <div className="flex col-span-5 items-center justify-center gap-5 xl:gap-10">
-        <ToggleSwitch />
-        <div className="relative bg-[#F3EAFF] p-1.5 xl:p-2 rounded-full">
-      
-          <div className="absolute -top-1 xl:-top-2 left-4.5 xl:left-5 size-4 xl:size-6 bg-[#8833FF] rounded-full flex items-center justify-center text-xs">
-            <p className="text-white">1</p>
-          </div>
 
-          <FaBell className="text-[#8833FF] text-sm  xl:text-xl" />
+      {/* RIGHT SECTION */}
+      <div className="flex items-center gap-5">
+        {/* THEME TOGGLE */}
+        <ToggleSwitch />
+
+        {/* NOTIFICATION */}
+        <div className="relative">
+          <Bell className="w-5 h-5 text-[#0F172A] dark:text-white" />
+
+          {/* RED DOT (FIXED POSITION) */}
+          <span
+            className="
+              absolute
+              -top-2
+              -right-1
+              w-2.5 h-2.5
+              bg-red-500
+              rounded-full
+            "
+          />
         </div>
-        <MdMessage className="text-gray-400  text-lg xl:text-xl" />
-        <FaUserGroup className="text-gray-400  text-lg xl:text-xl" />
-        <HiChartSquareBar className="text-gray-400  text-lg xl:text-xl"  />
+
+        {/* PROFILE (FIGMA MATCH) */}
+        <button
+          className="
+            w-[45px] h-[45px]
+            rounded-full
+            flex items-center justify-center
+            bg-white
+            border border-[#CBD5E1]
+            dark:bg-[#334155]
+            dark:border-black
+          "
+        >
+          <User className="w-5 h-5 text-[#64748B] dark:text-[#E5E7EB]" />
+        </button>
       </div>
-    </div>
+    </header>
   );
 };
 
 export default Header;
+

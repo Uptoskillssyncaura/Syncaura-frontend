@@ -1,17 +1,18 @@
-const ProgressBar = ({ value = 45 }) => {
-  return (
-    <div className="flex items-center gap-4 w-full">
-      <div className="relative w-full h-px bg-gray-200 rounded-full overflow-hidden">
+const ProgressBar = ({ label, value, maxValue = 100, color }) => {
+  const percentage = Math.min((value / maxValue) * 100, 100);
 
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center justify-between">
+        <span className="text-xs text-muted-foreground">{label}</span>
+        <span className="text-xs font-medium text-foreground">{value}</span>
+      </div>
+      <div className="w-full h-20 bg-secondary rounded-lg overflow-hidden flex flex-col-reverse">
         <div
-          className="absolute left-0 top-0 h-full bg-green-500 rounded-full transition-all duration-500 ease-out"
-          style={{ width: `${value}%` }}
+          className="w-full rounded-lg transition-all duration-500"
+          style={{ height: `${percentage}%`, backgroundColor: color }}
         />
       </div>
-
-      <span className="text-[#7D8FB3] text-sm font-semibold">
-        {value}%
-      </span>
     </div>
   );
 };

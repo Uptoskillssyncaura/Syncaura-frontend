@@ -2,7 +2,7 @@ import {
   Calendar,
   CircleCheckBig,
   Clock,
-  Funnel,
+  Filter,
   Search,
   XCircleIcon,
 } from "lucide-react";
@@ -102,7 +102,7 @@ const AttendanceLeave = () => {
                     border rounded-4xl
                     border-[#989696] dark:border-[#989696]"
           >
-            <Funnel className="size-5 text-[#082A44] dark:text-[#B2B2B2]" />
+            <Filter className="size-5 text-[#082A44] dark:text-[#B2B2B2]" />
             <h1 className="text-base text-[#575757] dark:text-[#8f8e8e] font-semibold">
               Filter
             </h1>

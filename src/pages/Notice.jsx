@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleThemeMethod } from "../redux/slices/themeSlice";
-import { Filter, Funnel, Plus, Search } from "lucide-react";
+import { Filter, Plus, Search } from "lucide-react";
 import RecentActivity from "../components/notice/RecentActivity";
 import NotificationRow from "../components/notice/NotificationRow";
 import { notificationsList } from "../constant/constant";
@@ -24,7 +24,7 @@ const Notice = () => {
         </h1>
         <div className="flex-1/3 flex items-center justify-center sm:justify-end  gap-2 ">
           <div className="flex-1/4 flex items-center justify-center w-full px-5 py-1 gap-2 border rounded-4xl border-[#989696] dark:border-[#FFFFFF] ">
-            <Funnel className="size-5 text-[#575757] dark:text-[#FFFFFF]    " />
+            <Filter className="size-5 text-[#575757] dark:text-[#FFFFFF]" />
             <span className="text-lg text-[#575757] dark:text-[#FFFFFF]">Filter</span>
           </div>
           <div className="flex-3/4 flex col-span-5 items-center  w-full gap-x-2 bg-[#EDEDED] dark:bg-[#2E2F2F] px-4 rounded-3xl py-2">

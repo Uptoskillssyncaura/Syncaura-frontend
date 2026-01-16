@@ -5,7 +5,7 @@ import {
   CircleCheck,
   Clock,
   Eye,
-  Funnel,
+  Filter,
   Plus,
   Search,
 } from "lucide-react";

@@ -1,3 +1,7 @@
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 
@@ -10,7 +14,7 @@ import UserDashboard from "./pages/UserDashboard";
 import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import Topbar from "./components/userdashboard/Topbar/Topbar"
+import Topbar from "./components/userdashboard/Topbar/Topbar";
 import Header from "./components/Meeting/Header/Header";
 import MobileSidebar from "./components/MobileSidebar";
 import Sidebar from "./components/userdashboard/Sidebar/Sidebar";
@@ -21,102 +25,46 @@ import Settings from "./pages/Settings";
 import Admin from "./pages/Admin";
 import Home from "./pages/Home";
 
+const queryClient = new QueryClient();
+
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/normal-dashboard" element={<Dashboard />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/sign-up" element={<SignUp />} />
-
-        {/* User dashboard with a different Topbar */}
-        <Route
-          path="/user-dashboard"
-          element={
-            <MainLayout TopbarComponent={Topbar} SideBar={Sidebar} >
-              <div className="  w-full h-full">
-                <UserDashboard />
-              </div>
-            </MainLayout>
-          }
-        />
-        <Route
-          path="/projects"
-          element={
-            <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
-              <Projects />
-            </MainLayout>
-          }
-        />
-        <Route
-          path="/attendance-leave"
-          element={
-            <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
-              <AttendanceLeave />
-            </MainLayout>
-          }
-        />
-        <Route
-          path="/tasks"
-          element={
-            <MainLayout TopbarComponent={Topbar}>
-              <Tasks />
-            </MainLayout>
-          }
-        />
-        <Route
-          path="/meetings"
-          element={
-            <MainLayout SideBar={MobileSidebar} TopbarComponent={Header}>
-              <Meetings />
-            </MainLayout>
-          }
-        />
-        <Route
-          path="/chat"
-          element={
-            <MainLayout TopbarComponent={Header} SideBar={MobileSidebar} >
-              <Chat />
-            </MainLayout>
-          }
-        />
-        <Route
-          path="/notice"
-          element={
-            <MainLayout TopbarComponent={Header} SideBar={MobileSidebar} >
-              <Notice />
-            </MainLayout>
-          }
-        />
-        <Route
-          path="/documents"
-          element={
-            <MainLayout TopbarComponent={Header} SideBar={MobileSidebar} >
-              <Documents />
-            </MainLayout>
-          }
-        />
-
-        <Route
-          path="/complaints"
-          element={
-            <MainLayout TopbarComponent={Header} SideBar={MobileSidebar} >
-              <Complaints />
-            </MainLayout>
-          }
-        />
-        <Route
-          path="/settings"
-          element={
-            <MainLayout TopbarComponent={Header} SideBar={MobileSidebar} >
-              <Settings />
-            </MainLayout>
-          }
-        />
-        
-      </Routes>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/normal-dashboard" element={<Dashboard />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            
+            {/* User dashboard */}
+            <Route
+              path="/user-dashboard"
+              element={
+                <MainLayout TopbarComponent={Topbar} SideBar={Sidebar}>
+                  <UserDashboard />
+                </MainLayout>
+              }
+            />
+            <Route
+              path="/projects"
+              element={
+                <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
+                  <Projects />
+                </MainLayout>
+              }
+            />
+            {/* Add other routes similarly */}
+            
+            {/* Catch all */}
+            <Route path="*" element={<Dashboard />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
   );
 }

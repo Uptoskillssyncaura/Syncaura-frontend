@@ -1,4 +1,4 @@
-import { Funnel, Search } from 'lucide-react'
+import { Filter, Search } from 'lucide-react'
 
 const Complaintheader = ({ search, setSearch }) => {
     return (
@@ -9,7 +9,7 @@ const Complaintheader = ({ search, setSearch }) => {
 
             <div className="flex items-center justify-center sm:justify-end gap-3 flex-2/9   ">
                 <button className="rounded-full flex items-center justify-center  border border-gray-300 dark:border-[#777575] px-4 py-2 text-sm text-black dark:text-[#8A8A8A] gap-3">
-                    <Funnel className="size-4 " />
+                    <Filter className="size-4 " />
                     <span>Filter</span>
                 </button>
                 <div

@@ -1,4 +1,4 @@
-import { Edit3, Funnel, Search } from "lucide-react";
+import { Edit3, Filter, Search } from "lucide-react";
 import Avatar from "../Avatar";
 import { useEffect, useState } from "react";
 
@@ -39,7 +39,7 @@ export default function Sidebar({ chats, selectedChat, onSelect }) {
       <div className="p-4 border-b">
         <div className="flex w-full items-center justify-between">
           <h2 className="text-3xl text-[#000000] dark:text-[#FFFFFF] font-semibold mb-2">Chat</h2>
-          <Funnel className="size-8 text-black dark:text-white fill-black dark:fill-white" />
+          <Filter className="size-8 text-black dark:text-white fill-black dark:fill-white" />
         </div>
         <div className="flex mt-2 items-center gap-2 bg-[#EDEDED] dark:bg-[#000000] border border-[#989696] px-3 py-2 rounded-lg">
           <Search size={16} className="text-gray-500" />
