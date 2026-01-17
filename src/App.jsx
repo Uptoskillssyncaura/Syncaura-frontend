@@ -3,7 +3,8 @@ import MainLayout from "./layouts/MainLayout";
 
 import Projects from "./pages/Projects";
 import Tasks from "./pages/Tasks";
-import FlowbitMeetingPage from "./pages/Meetings";
+import Meetings from "./pages/Meetings";
+import FlowbitMeetingPage from "./pages/CurrentMeet";
 import Chat from "./pages/Chat";
 import Documents from "./pages/Documents";
 import UserDashboard from "./pages/UserDashboard";
