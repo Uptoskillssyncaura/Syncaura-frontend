@@ -51,14 +51,16 @@ export default function App() {
             </MainLayout>
           }
         />
-        <Route
-          path="/meetings"
-          element={
-            <MainLayout TopbarComponent={Header}>
-              <Meetings />
-            </MainLayout>
-          }
-        />
+       <Route
+  path="/meetings"
+  element={
+    <MediaProvider>
+      <MainLayout SideBar={MobileSidebar} TopbarComponent={Header}>
+        <FlowbitMeetingPage />
+      </MainLayout>
+    </MediaProvider>
+  }
+/>
         <Route
           path="/chat"
           element={
