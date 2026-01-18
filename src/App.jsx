@@ -4,7 +4,6 @@ import MainLayout from "./layouts/MainLayout";
 import Projects from "./pages/Projects";
 import Tasks from "./pages/Tasks";
 import Meetings from "./pages/Meetings";
-import FlowbitMeetingPage from "./pages/CurrentMeet";
 import Chat from "./pages/Chat";
 import Documents from "./pages/Documents";
 import UserDashboard from "./pages/UserDashboard";
@@ -21,7 +20,6 @@ import Notice from "./pages/Notice";
 import Settings from "./pages/Settings";
 import Admin from "./pages/Admin";
 import Home from "./pages/Home";
-import { MediaProvider } from "./context/MediaContext";
 
 
 export default function App() {
