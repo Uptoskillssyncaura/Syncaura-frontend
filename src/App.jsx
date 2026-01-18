@@ -21,7 +21,6 @@ import Settings from "./pages/Settings";
 import Admin from "./pages/Admin";
 import Home from "./pages/Home";
 
-
 export default function App() {
   return (
     <BrowserRouter>
@@ -67,15 +66,14 @@ export default function App() {
             </MainLayout>
           }
         />
-       <Route 
-        path = "/meetings"
-        elements={
-          <MainLayout TopbarComponent={Header}>
-
-<Meetings />
-
-</MainLayout>
-        }/>
+        <Route
+          path="/meetings"
+          element={
+            <MainLayout SideBar={MobileSidebar} TopbarComponent={Header}>
+              <Meetings />
+            </MainLayout>
+          }
+        />
         <Route
           path="/chat"
           element={
