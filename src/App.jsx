@@ -78,19 +78,6 @@ export default function App() {
 
 </MainLayout>
         }/>
-
-       <Route
-  path="/currentmeet.jsx"
-  element={
-    <MediaProvider>
-      <MainLayout SideBar={MobileSidebar} TopbarComponent={Header}>
-        <FlowbitMeetingPage />
-      </MainLayout>
-    </MediaProvider>
-  }
-/>
-
-
         <Route
           path="/chat"
           element={
