@@ -106,7 +106,7 @@ export default function Complaints() {
 />
 
       ) : (
-        <div className="relative w-full transition-colors duration-500  border-t dark:border-[#000000] h-full bg-[#FFFFFF] dark:bg-[#2E2F2F]  pt-6 pb-24 overflow-hidden">
+        <div className="relative w-full transition-colors duration-500  border-t dark:border-[#000000] h-full bg-[#FFFFFF] dark:bg-[#000000]  pt-6 pb-24 overflow-hidden">
          <Complaintheader
   search={searchComplaints}
   setSearch={setSearchComplaints}
