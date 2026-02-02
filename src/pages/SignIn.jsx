@@ -4,8 +4,9 @@ import { useForm } from "react-hook-form";
 import SocialAuthButton from "../components/auth/SocialAuthButton";
 import { motion } from "framer-motion";
 import PasswordField from "../components/auth/PasswordField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AnimatedInput from "../components/auth/AnimatedInput";
+import api from "../config/axios";
 
 const SignIn = () => {
   const {
@@ -14,7 +15,9 @@ const SignIn = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const [isSubmitting, setIsSubmitting]=useState(false)
+  const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   
   const wrapperRef = useRef(null);
   const passRef = useRef(null);
@@ -53,12 +56,26 @@ const SignIn = () => {
       "ring-[#01509C]/30"
     );
   };
-  const onSubmit = (data) => {
-   setIsSubmitting(true);
-   setTimeout(()=>{
-     console.log(data);
-     setIsSubmitting(false)
-   }, [1000])
+  const onSubmit = async (data) => {
+    setIsSubmitting(true);
+    setErrorMessage("");
+    try {
+      const response = await api.post("/auth/login", {
+        email: data.email,
+        password: data.password,
+      });
+      
+      // Store token in localStorage
+      localStorage.setItem("token", response.data.tokens.accessToken);
+      localStorage.setItem("refreshToken", response.data.tokens.refreshToken);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      
+      // Redirect to dashboard
+      navigate("/user-dashboard");
+    } catch (err) {
+      setErrorMessage(err.response?.data?.message || "Login failed. Please try again.");
+      setIsSubmitting(false);
+    }
   };
   const onError = (error) => {
     console.log(error);
@@ -87,6 +104,11 @@ const SignIn = () => {
         />
         <div className="rounded-4xl lg:rounded-r-none z-80 py-5 xl:py-15 px-10 xl:px-20 pr-5 xl:pr-15  w-full bg-[#ECECEC] flex flex-col items-center justify-center">
           <h1 className="text-[#000000] text-2xl font-bold">Welcome Back</h1>
+          {errorMessage && (
+            <div className="w-full mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md text-sm">
+              {errorMessage}
+            </div>
+          )}
           <form
             onSubmit={handleSubmit(onSubmit, onError)}
             className="space-y-4 w-full mt-10"

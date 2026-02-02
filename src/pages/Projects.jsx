@@ -1,29 +1,42 @@
 import { ChevronDown, Ellipsis, Flag, ListFilter, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Tab from "../components/projects/Tab";
 import ProjectCard from "../components/projects/ProjectCard";
 import { PROJECTS } from "../constant/constant";
 import CreateNewProject from "../components/projects/Model/CreateNewProject";
 import { AnimatePresence, motion } from "framer-motion";
 import ProjectFilter from "../components/projects/ProjectFilter";
+import { getProjects } from "../redux/features/projectThunks";
 
 const Projects = () => {
+  const dispatch = useDispatch();
+  const { projects, isLoading, error } = useSelector((state) => state.project);
+  
   const [currTab, setCurrTab] = useState("All Projects");
   const [showModel, setShowModel] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
   const [appliedFilters, setAppliedFilters] = useState(null);
+
+  // Fetch projects on component mount
+  useEffect(() => {
+    dispatch(getProjects());
+  }, [dispatch]);
+
+  // Use backend projects or fallback to constants
+  const projectsData = projects && projects.length > 0 ? projects : PROJECTS;
+
   const tabData = [
-    { title: "All Projects", count: PROJECTS.length },
-    { title: "Ongoing", count: PROJECTS.filter((item) => item.priority === "Ongoing").length },
-    { title: "Completed", count: PROJECTS.filter((item) => item.priority === "Completed").length },
-    { title: "On Hold", count: PROJECTS.filter((item) => item.priority === "On Hold").length },
+    { title: "All Projects", count: projectsData.length },
+    { title: "Ongoing", count: projectsData.filter((item) => item.status === "Ongoing").length },
+    { title: "Completed", count: projectsData.filter((item) => item.status === "Completed").length },
+    { title: "On Hold", count: projectsData.filter((item) => item.status === "On Hold").length },
   ];
 
   const filteredProjects =
     currTab === "All Projects"
-      ? PROJECTS
-      : PROJECTS.filter((item) => item.priority === currTab);
-
+      ? projectsData
+      : projectsData.filter((item) => item.status === currTab);
 
   const handleApplyFilters = (newFilters) => {
     setAppliedFilters(newFilters);
@@ -109,11 +122,41 @@ const Projects = () => {
         
       </div>
       <div className="bg-[#FFFFFF] dark:bg-[#000000]  mt-5" >
-        <div className="px-5 py-3  flex flex-wrap  items-center justify-center gap-x-14 gap-y-8 ">
-          {filteredProjects.map(({ title, department, priority, progress, dueDate, avatars }, idx) => (
-            <ProjectCard key={idx} title={title} department={department} priority={priority} progress={progress} dueDate={dueDate} avatars={avatars} />
-          ))}
-        </div>
+        {isLoading && (
+          <div className="px-5 py-10 flex justify-center items-center">
+            <div className="text-lg font-semibold text-[#2457C5] dark:text-[#73FBFD]">
+              Loading projects...
+            </div>
+          </div>
+        )}
+        {error && (
+          <div className="px-5 py-10 flex justify-center items-center">
+            <div className="text-lg font-semibold text-red-600">
+              Error: {error}
+            </div>
+          </div>
+        )}
+        {!isLoading && !error && (
+          <div className="px-5 py-3  flex flex-wrap  items-center justify-center gap-x-14 gap-y-8 ">
+            {filteredProjects.length > 0 ? (
+              filteredProjects.map((project) => (
+                <ProjectCard 
+                  key={project._id || project.id} 
+                  title={project.title || project.name}
+                  department={project.department}
+                  priority={project.status}
+                  progress={project.progress}
+                  dueDate={project.dueDate}
+                  avatars={project.avatars}
+                />
+              ))
+            ) : (
+              <div className="w-full text-center py-10">
+                <p className="text-gray-500 dark:text-gray-400">No projects found</p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
       {showModel && <CreateNewProject onClose={() => setShowModel(false)} />}
     </div>

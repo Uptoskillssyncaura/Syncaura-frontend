@@ -30,7 +30,7 @@ const OverallContextChart = () => {
 
       <div className="flex flex-col md:flex-row items-center gap-6">
 
-        <div className="w-full md:w-[220px] h-[220px] relative">
+        <div className="w-full md:w-[220px] h-[220px] relative flex-shrink-0">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -45,7 +45,7 @@ const OverallContextChart = () => {
                 stroke="none"
               >
                 {data.map((entry, index) => (
-                  <Cell key={index} fill={entry.color} />
+                  <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
             </PieChart>

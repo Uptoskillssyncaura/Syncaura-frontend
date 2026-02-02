@@ -3,8 +3,12 @@ import { X } from "lucide-react";
 import MotionSelect from "./MotionSelect";
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { createProject } from "../../../redux/features/projectThunks";
 
 const CreateNewProject = ({ onClose }) => {
+    const dispatch = useDispatch();
+    const { isLoading } = useSelector((state) => state.project);
     const teams = ["Design", "Development", "Marketing", "HR", "Sales"];
 
     const projectStatus = [
@@ -54,9 +58,25 @@ const CreateNewProject = ({ onClose }) => {
     const startDate = watch("startDate");
     const today = new Date().toISOString().split("T")[0];
 
-    const onSubmit = (data) => {
-        console.log("FORM DATA ", data);
-        onClose();
+    const onSubmit = async (data) => {
+        try {
+            const projectData = {
+                title: data.title,
+                description: data.description,
+                team: data.team,
+                status: data.status,
+                priority: data.priority,
+                startDate: data.startDate,
+                dueDate: data.dueDate,
+                members: data.members || [],
+                owner: data.owner,
+            };
+            
+            await dispatch(createProject(projectData)).unwrap();
+            onClose();
+        } catch (error) {
+            console.error("Failed to create project:", error);
+        }
     };
 
     const onError = (err) => {
@@ -271,10 +291,10 @@ const CreateNewProject = ({ onClose }) => {
                             <div className="flex items-center justify-end w-full">
                                 <div className="flex items-center justify-center gap-5 ">
                                     <div className="flex items-center justify-center ">
-                                        <button type="button" className="text-[#000000] dark:text-[#FFFFFF] text-base font-medium hover:underline " onClick={onClose} >Cancel</button>
+                                        <button type="button" className="text-[#000000] dark:text-[#FFFFFF] text-base font-medium hover:underline " onClick={onClose} disabled={isLoading}>Cancel</button>
                                     </div>
-                                    <button type="submit" className="flex items-center justify-center hover:bg-[#4277eb] bg-[#2461E6] rounded-3xl px-5 py-1.5 dark:bg-[#73FBFD] dark:hover:bg-[#14d3d6]  ">
-                                        <p className=" text-[#EDEDED] dark:text-[#000000] text-base font-semibold" >Create Project</p>
+                                    <button type="submit" disabled={isLoading} className="flex items-center justify-center hover:bg-[#4277eb] bg-[#2461E6] rounded-3xl px-5 py-1.5 dark:bg-[#73FBFD] dark:hover:bg-[#14d3d6] disabled:opacity-50 disabled:cursor-not-allowed ">
+                                        <p className=" text-[#EDEDED] dark:text-[#000000] text-base font-semibold" >{isLoading ? "Creating..." : "Create Project"}</p>
                                     </button>
 
                                 </div>

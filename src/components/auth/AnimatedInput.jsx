@@ -2,13 +2,14 @@ import { motion } from "framer-motion";
 import { Mail, User } from "lucide-react"; // You can import more icons if needed
 
 const AnimatedInput = ({
-  type = "text", // "email", "text", "password", etc.
+  type = "text",
   placeholder = "",
   register,
+  fieldName = "",
   wrapperRef,
   handleFocus,
   handleBlur,
-  iconType = "mail", // "mail" | "user" | "lock" etc.
+  iconType = "mail",
 }) => {
   // Choose icon based on type
   const renderIcon = () => {
@@ -44,7 +45,7 @@ const AnimatedInput = ({
         <motion.input
           type={type}
           placeholder={placeholder}
-          {...register(placeholder.toLowerCase().replace(/\s+/g, "_"), {
+          {...register(fieldName || placeholder.toLowerCase().replace(/\s+/g, "_"), {
             required: `${placeholder} is required`,
             ...(type === "email"
               ? {

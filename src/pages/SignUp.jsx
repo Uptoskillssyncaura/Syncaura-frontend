@@ -1,11 +1,12 @@
-import { ChevronDown, Loader, Mail } from "lucide-react";
+import { ChevronDown, Loader, Mail, Lock } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import SocialAuthButton from "../components/auth/SocialAuthButton";
 import { motion, AnimatePresence } from "framer-motion";
 import PasswordField from "../components/auth/PasswordField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AnimatedInput from "../components/auth/AnimatedInput";
+import api from "../config/axios";
 
 const SignUp = () => {
   const {
@@ -19,8 +20,10 @@ const SignUp = () => {
       role: "User",
     },
   });
+  const navigate = useNavigate();
   const roles = ["User", "Admin", "Co-Admin"];
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
   useEffect(() => {
@@ -72,12 +75,42 @@ const SignUp = () => {
       "ring-[#01509C]/30"
     );
   };
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     setIsSubmitting(true);
-    setTimeout(() => {
-      console.log(data);
+    setErrorMessage("");
+    console.log("Form submitted with data:", data);
+    
+    // Validate confirm password matches password
+    if (data.password !== data.confirmPassword) {
+      setErrorMessage("Passwords do not match");
       setIsSubmitting(false);
-    }, [1000]);
+      return;
+    }
+
+    try {
+      console.log("Sending registration request...");
+      const response = await api.post("/auth/register", {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        role: data.role.toLowerCase(),
+      });
+      
+      console.log("Registration response:", response.data);
+      
+      // Store token in localStorage
+      localStorage.setItem("token", response.data.tokens.accessToken);
+      localStorage.setItem("refreshToken", response.data.tokens.refreshToken);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      
+      console.log("Redirecting to dashboard...");
+      // Redirect to dashboard
+      navigate("/user-dashboard");
+    } catch (err) {
+      console.error("Registration error:", err);
+      setErrorMessage(err.response?.data?.message || "Signup failed. Please try again.");
+      setIsSubmitting(false);
+    }
   };
   const onError = (error) => {
     console.log(error);
@@ -118,6 +151,11 @@ const SignUp = () => {
         </div>
         <div className="rounded-4xl lg:rounded-l-none z-80 py-5 px-10 xl:px-20 pr-5 xl:pr-15  w-full bg-[#2461E6] flex flex-col items-center justify-center">
           <h1 className="text-[#FFFFFF] text-2xl font-bold">Create Account</h1>
+          {errorMessage && (
+            <div className="w-full mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md text-sm">
+              {errorMessage}
+            </div>
+          )}
           <form
             onSubmit={handleSubmit(onSubmit, onError)}
             className="space-y-2 w-full mt-1"
@@ -131,6 +169,7 @@ const SignUp = () => {
                   type="text"
                   placeholder="John Doe"
                   iconType="user"
+                  fieldName="name"
                   register={register}
                   wrapperRef={userRef}
                   handleFocus={handleFocus}
@@ -147,6 +186,7 @@ const SignUp = () => {
                   type="email"
                   placeholder="Email"
                   iconType="mail"
+                  fieldName="email"
                   register={register}
                   wrapperRef={wrapperRef}
                   handleFocus={handleFocus}
@@ -173,12 +213,33 @@ const SignUp = () => {
                 Confirm Password
               </label>
               <div className="flex flex-col items-start justify-center w-full gap-1 ">
-                <PasswordField
-                  register={register}
-                  handleFocus={handleFocus}
-                  handleBlur={handleBlur}
-                  passRef={conPassRef}
-                />
+                <motion.div
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 22 }}
+                  className="w-full"
+                >
+                  <div
+                    ref={conPassRef}
+                    className="bg-[#F8F8F8]  w-full px-4 py-2 flex items-center gap-2
+                    border border-transparent rounded-md transition-all duration-200"
+                  >
+                    <Lock className="text-black size-6" />
+
+                    <motion.input
+                      type="password"
+                      placeholder="Confirm Password"
+                      {...register("confirmPassword", {
+                        required: "Please confirm your password",
+                      })}
+                      onFocus={() => handleFocus(conPassRef)}
+                      onBlur={() => handleBlur(conPassRef)}
+                      whileFocus={{ scale: 1.01 }}
+                      transition={{ type: "spring", stiffness: 500, damping: 25 }}
+                      className="text-black text-sm placeholder:text-black bg-transparent outline-none w-full"
+                    />
+                  </div>
+                </motion.div>
               </div>
             </div>
 

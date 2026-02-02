@@ -217,8 +217,9 @@ const Dashboard = () => {
   justify-start
 "
         >
-          {deadlineTask.map((item) => (
+          {deadlineTask.map((item, idx) => (
             <Deadlines
+              key={idx}
               title={item.title}
               descColor={item.descColor}
               status={item.status}

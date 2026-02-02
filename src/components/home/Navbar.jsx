@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Sun, Moon, Menu, X as XIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useDarkMode } from "../../hooks/useDarkMode";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useDarkMode();
+  const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -109,13 +111,18 @@ const Navbar = () => {
             )}
           </button>
 
-          <a href="#login" className="hidden md:block text-sm font-medium hover:opacity-80 transition-opacity" style={{ 
-            color: 'var(--accent-color)' 
-          }}>
+          <a 
+            onClick={() => navigate('/sign-in')}
+            className="hidden md:block text-sm font-medium hover:opacity-80 transition-opacity cursor-pointer" 
+            style={{ 
+              color: 'var(--accent-color)' 
+            }}
+          >
             Login
           </a>
 
           <button
+            onClick={() => navigate('/sign-up')}
             className="hidden md:block px-6 py-2 text-sm font-medium rounded-md hover:opacity-90 transition-opacity"
             style={{
               backgroundColor: "var(--accent-color)",
@@ -178,13 +185,20 @@ const Navbar = () => {
               Contact
             </a>
             <a 
-              href="#login" 
-              className="block text-sm font-medium" 
+              onClick={() => {
+                navigate('/sign-in');
+                setMobileMenuOpen(false);
+              }}
+              className="block text-sm font-medium cursor-pointer" 
               style={{ color: 'var(--accent-color)' }}
             >
               Login
             </a>
             <button
+              onClick={() => {
+                navigate('/sign-up');
+                setMobileMenuOpen(false);
+              }}
               className="w-full px-6 py-2 text-sm font-medium rounded-md"
               style={{
                 backgroundColor: "var(--accent-color)",
