@@ -7,13 +7,25 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --bg-primary: #ffffff;
+  --text-primary: #000000;
+  --bg-secondary: #f6f7fb;
+  --text-secondary: #666666;
+}
+
+:root[data-theme="dark"] {
+  --bg-primary: #000000;
+  --text-primary: #ffffff;
+  --bg-secondary: #1a1a1a;
+  --text-secondary: #cccccc;
 }
 
 
