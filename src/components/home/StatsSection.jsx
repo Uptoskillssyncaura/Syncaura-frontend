@@ -1,170 +1,96 @@
 import React from 'react';
-import { motion } from "framer-motion";
 
 const StatsSection = () => {
   return (
-    <section
-      className="w-full py-16"
-      style={{ backgroundColor: 'var(--bg-primary)' }}
-    >
-      <div className="max-w-7xl mx-auto px-6">
-
-        {/* HEADER */}
-        <motion.div
-          className="mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <p
-            className="text-sm font-medium mb-3"
-            style={{ color: 'var(--text-primary)' }}
-          >
+    <section className="w-full py-8 md:py-16" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+        {/* Header */}
+        <div className="mb-8 md:mb-12">
+          <p className="text-sm md:text-sm font-medium mb-2 md:mb-3" style={{ color: 'var(--text-secondary)' }}>
             Growth
           </p>
-
-          <h2
-            className="text-4xl font-bold mb-4"
-            style={{ color: 'var(--text-primary)' }}
-          >
+          <h2 className="text-[30px] md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4" style={{ color: 'var(--text-primary)' }}>
             Millions trust Flowbit daily
           </h2>
-
-          <p
-            className="text-base max-w-10xl"
-            style={{ color: 'var(--text-primary)' }}
-          >
-            Over two million users worldwide depend on Flowbit to manage their work.
-            Students, teams, and organizations choose us because we deliver results.
+          <p className="text-[14px] md:text-base max-w-10xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            Over two million users worldwide depend on Flowbit to manage their work. Students, teams, and organizations choose us because we deliver results.
           </p>
-        </motion.div>
-
-        {/* STATS */}
-        <motion.div
-          className="grid md:grid-cols-2 gap-16 mb-8"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
-          variants={{
-            hidden: {},
-            visible: {
-              transition: {
-                staggerChildren: 0.15
-              }
-            }
-          }}
-        >
-          {[
-            { value: "2M+", text: "Active users across the globe" },
-            { value: "98%", text: "User satisfaction rating from our community" }
-          ].map((item, i) => (
-            <motion.div
-              key={i}
-              variants={{
-                hidden: { opacity: 0, y: 30 },
-                visible: { opacity: 1, y: 0 }
-              }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-            >
-              <p
-                className="text-5xl font-bold mb-2"
-                style={{ color: 'var(--text-primary)' }}
-              >
-                {item.value}
-              </p>
-
-              <p
-                className="text-base"
-                style={{ color: 'var(--text-secondary)' }}
-              >
-                {item.text}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* ACTION BUTTONS */}
-        <div className="flex items-center gap-4">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="px-6 py-2 border text-sm font-medium rounded-md hover:opacity-70 transition-opacity"
-            style={{
-              borderColor: 'var(--border-color)',
-              color: 'var(--text-secondary)'
-            }}
-          >
-            Learn
-          </motion.button>
-
-          <motion.button
-            whileHover={{ x: 6 }}
-            className="flex items-center gap-2 text-sm font-medium hover:opacity-70 transition-opacity"
-            style={{ color: 'var(--text-secondary)' }}
-          >
-            <span>Arrow</span>
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path
-                d="M5 12H19M19 12L13 6M19 12L13 18"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </motion.button>
         </div>
 
-        {/* LOGOS */}
-        <motion.div
-          className="mt-16"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: false, amount: 0.4 }}
-          transition={{ duration: 0.6 }}
-        >
-          <p
-            className="text-center text-sm mb-8"
-            style={{ color: 'var(--text-secondary)' }}
-          >
-            Trusted by top students all over the world
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 gap-6 md:gap-16 mb-6 pt-1 md:mb-8">
+          <div>
+            <p className="text-[40px] md:text-4xl lg:text-5xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+              2M+
+            </p>
+            <p className="text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>
+              Active users across the globe
+            </p>
+          </div>
+          <div>
+            <p className="text-[40px] md:text-4xl lg:text-5xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+              98%
+            </p>
+            <p className="text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>
+              User satisfaction rating from our community
+            </p>
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex items-center gap-4 mb-12 pt-2 md:mb-16">
+          <button className="px-6 py-3 border text-md font-medium hover:opacity-70 transition-opacity" style={{ 
+            borderColor: 'var(--border-color)',
+            backgroundColor: 'var(--bg-primary)',
+            color: 'var(--text-secondary)' 
+          }}>
+            Learn
+          </button>
+          <button className="flex items-center gap-2 text-md font-medium hover:opacity-70 transition-opacity" style={{ 
+            color: 'var(--text-secondary)' 
+          }}>
+            <span>Arrow</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Trust Bar */}
+        <div>
+          <p className="text-center text-xs md:text-sm mb-6 pt-5 md:mb-8" style={{ color: 'var(--text-secondary)' }}>
+            Trusted by top students all the world
           </p>
-
-          <motion.div
-            className="flex justify-center gap-8 flex-wrap"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.3 }}
-            variants={{
-              hidden: {},
-              visible: {
-                transition: {
-                  staggerChildren: 0.08
-                }
-              }
-            }}
-          >
-            {Array.from({ length: 8 }).map((_, i) => (
-              <motion.div
-                key={i}
-                className="w-14 h-14 rounded-lg"
-                style={{ backgroundColor: 'var(--bg-secondary)' }}
-                variants={{
-                  hidden: { opacity: 0, scale: 0.85 },
-                  visible: { opacity: 1, scale: 1 }
-                }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-              />
-            ))}
-          </motion.div>
-        </motion.div>
-
+        <div className="overflow-hidden relative w-full flex justify-center">
+  <style dangerouslySetInnerHTML={{ __html: `
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(calc(-40px * 6 - 1.5rem * 6));
+      }
+    }
+    .animate-scroll {
+      animation: scroll 15s linear infinite;
+    }
+    .animate-scroll:hover {
+      animation-play-state: paused;
+    }
+  `}} />
+  <div className="relative max-w-[700px] overflow-hidden">
+    <div className="flex gap-6 animate-scroll">
+      {Array.from({ length: 8 }).map((_, i) => (
+        <div
+          key={i}
+          className="w-10 h-10 rounded-[10px] flex-shrink-0"
+          style={{ backgroundColor: 'var(--bg-secondary)' }}
+        />
+      ))}
+    </div>
+  </div>
+</div>
+        </div>
       </div>
     </section>
   );
