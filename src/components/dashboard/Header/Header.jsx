@@ -44,7 +44,7 @@ const Header = ({currTab, show, setShow}) => {
         </div>
       </div>
       <div
-        class="flex col-span-5 items-center  gap-x-2 bg-gray-200/10 
+        className="flex col-span-5 items-center  gap-x-2 bg-gray-200/10 
             shadow-[0_4px_4px_0_rgba(0,0,0,0.25),0_0px_4px_0_rgba(0,0,0,0.15)] 
              px-4 xl:px-10  rounded-3xl h-10 "
       >

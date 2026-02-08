@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
+
 import { Mail, User } from "lucide-react"; // You can import more icons if needed
 
 const AnimatedInput = ({
   type = "text", // "email", "text", "password", etc.
   placeholder = "",
+  name,
   register,
   wrapperRef,
   handleFocus,
@@ -44,17 +46,17 @@ const AnimatedInput = ({
         <motion.input
           type={type}
           placeholder={placeholder}
-          {...register(placeholder.toLowerCase().replace(/\s+/g, "_"), {
-            required: `${placeholder} is required`,
-            ...(type === "email"
-              ? {
-                  pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                    message: "Please enter a valid email",
-                  },
-                }
-              : {}),
-          })}
+          {...register(name, {
+          required: `${placeholder} is required`,
+          ...(type === "email"
+          ? {
+        pattern: {
+          value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+          message: "Please enter a valid email",
+        },
+      }
+    : {}),
+    })}
           onFocus={() => handleFocus(wrapperRef)}
           onBlur={() => handleBlur(wrapperRef)}
           initial={false}

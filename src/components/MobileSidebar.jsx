@@ -20,6 +20,8 @@ import {
 
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import {useNavigate} from "react-router-dom";
+
 
 
 const menuItems = [
@@ -32,15 +34,20 @@ const menuItems = [
     { label: "Notice", icon: Megaphone, path: "/notice", count: 3 },
     { label: "Attendance & Leave", icon: Clock, path: "/attendance-leave", count: 0 },
     { label: "Settings", icon: Settings, path: "/settings", count: 0 },
+    
 ];
 
 
 
 export default function MobileSidebar({ open, setOpen }) {
+    const navigate=useNavigate();
     const { isDark } = useSelector((state)=>state.theme.isDark)
     const logOutHandle = () => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("user");
         console.log('LogOut SUccessfully');
-
+        navigate("/sign-in");
     }
 
     return (

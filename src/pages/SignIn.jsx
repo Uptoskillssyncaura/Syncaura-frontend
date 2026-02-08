@@ -6,8 +6,11 @@ import { motion } from "framer-motion";
 import PasswordField from "../components/auth/PasswordField";
 import { Link } from "react-router-dom";
 import AnimatedInput from "../components/auth/AnimatedInput";
+import { useNavigate } from "react-router-dom";
+import api from "../services/api";
 
 const SignIn = () => {
+  const navigate=useNavigate();
   const {
     register,
     handleSubmit,
@@ -15,6 +18,7 @@ const SignIn = () => {
     formState: { errors },
   } = useForm();
   const [isSubmitting, setIsSubmitting]=useState(false)
+  const [errorMsg,setErrorMsg]=useState("")
   
   const wrapperRef = useRef(null);
   const passRef = useRef(null);
@@ -53,19 +57,57 @@ const SignIn = () => {
       "ring-[#01509C]/30"
     );
   };
-  const onSubmit = (data) => {
-   setIsSubmitting(true);
-   setTimeout(()=>{
-     console.log(data);
-     setIsSubmitting(false)
-   }, [1000])
-  };
+  const onSubmit = async (data) => {
+    setErrorMsg("");
+    console.log(data);
+  try {
+    setIsSubmitting(true);
+
+    const res = await api.post("/api/auth/login", {
+      email: data.email,
+      password: data.password,
+    });
+
+    console.log("FULL RESPONSE:",res.data);
+    
+
+    const { user, tokens } = res.data;
+    console.log("USER ROLE=",user.role);
+    // 🔐 Save auth data
+    localStorage.setItem("accessToken", tokens.accessToken);
+    localStorage.setItem("refreshToken", tokens.refreshToken);
+    localStorage.setItem("user", JSON.stringify(user));
+    
+    // 🚀 Role-based redirect
+    if (user.role === "admin") {
+      navigate("/admin");
+    } else if (user.role === "co-admin") {
+      navigate("/normal-dashboard");
+    } else {
+      navigate("/user-dashboard");
+    }
+
+  } catch (error) {
+  console.error("Login failed:", error.response?.data || error.message);
+
+  if (error.response?.status === 401) {
+    setErrorMsg("Invalid email or password");
+  } else if (error.response?.status === 404) {
+    setErrorMsg("API route not found");
+  } else {
+    setErrorMsg("Server error. Try again later");
+  }
+}
+  finally {
+    setIsSubmitting(false);
+  }
+};
   const onError = (error) => {
     console.log(error);
   };
   return (
     <div
-      class="bg-[radial-gradient(ellipse_60%_70%_at_center,#4a9df0_0%,#01509C_65%,#013b73_100%)]
+      className="bg-[radial-gradient(ellipse_60%_70%_at_center,#4a9df0_0%,#01509C_65%,#013b73_100%)]
  w-full min-h-screen flex items-center justify-center overflow-hidden  "
     >
       <motion.div
@@ -88,23 +130,27 @@ const SignIn = () => {
         <div className="rounded-4xl lg:rounded-r-none z-80 py-5 xl:py-15 px-10 xl:px-20 pr-5 xl:pr-15  w-full bg-[#ECECEC] flex flex-col items-center justify-center">
           <h1 className="text-[#000000] text-2xl font-bold">Welcome Back</h1>
           <form
-            onSubmit={handleSubmit(onSubmit, onError)}
-            className="space-y-4 w-full mt-10"
-          >
+          onSubmit={(e) => {
+            console.log("FORM SUBMIT CLICKED");
+            handleSubmit(onSubmit, onError)(e);
+          }}
+          className="space-y-4 w-full mt-10"
+        >
             <div className="relative flex flex-col items-start justify-center gap-1.5 ">
               <label className="text-[#000000] text-base font-medium">
                 Email Address
               </label>
               <div className="flex flex-col items-start justify-center w-full gap-1 ">
                 <AnimatedInput
-  type="email"
-  placeholder="Email"
-  iconType="mail"
-  register={register}
-  wrapperRef={wrapperRef}
-  handleFocus={handleFocus}
-  handleBlur={handleBlur}
-/>
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    iconType="mail"
+                    register={register}
+                    wrapperRef={wrapperRef}
+                    handleFocus={handleFocus}
+                    handleBlur={handleBlur}
+                  />
 
               </div>
             </div>
@@ -115,6 +161,7 @@ const SignIn = () => {
               </label>
               <div className="flex flex-col items-start justify-center w-full gap-1 ">
                 <PasswordField
+                name="password"
                   register={register}
                   handleFocus={handleFocus}
                   handleBlur={handleBlur}
@@ -125,7 +172,11 @@ const SignIn = () => {
                     Forgot Password?
                   </p>
                 </div>
-              </div>
+               
+                    {errorMsg && (
+                      <p className="text-red-500 text-sm font-semibold">{errorMsg}</p>
+                    )}
+                </div>
             </div>
             <motion.div
               whileHover={{
@@ -149,6 +200,7 @@ const SignIn = () => {
                 whileHover={{ y: -1 }}
                 whileTap={{ y: 1 }}
                 transition={{ type: "spring", stiffness: 400 }}
+                
                 className="text-[#F8F8F8] font-bold text-lg"
               >
                {isSubmitting ? <Loader className="size-5 text-white animate-spin" /> : " Sign In"}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Sun, Moon, Menu, X as XIcon } from 'lucide-react';
 import { useDarkMode } from "../../hooks/useDarkMode";
+import {Link} from "react-router-dom";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useDarkMode();
@@ -109,12 +110,13 @@ const Navbar = () => {
             )}
           </button>
 
-          <a href="#login" className="hidden md:block text-sm font-medium hover:opacity-80 transition-opacity" style={{ 
-            color: 'var(--accent-color)' 
-          }}>
+          <Link
+          to="/sign-in"
+            className="hidden md:block text-sm font-medium hover:opacity-80 transition-opacity"
+            style={{ color: 'var(--accent-color)' }}
+          >
             Login
-          </a>
-
+          </Link>
           <button
             className="hidden md:block px-6 py-2 text-sm font-medium rounded-md hover:opacity-90 transition-opacity"
             style={{

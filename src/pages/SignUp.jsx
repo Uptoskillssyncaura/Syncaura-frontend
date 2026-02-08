@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import PasswordField from "../components/auth/PasswordField";
 import { Link } from "react-router-dom";
 import AnimatedInput from "../components/auth/AnimatedInput";
+import api from "../services/api";
 
 const SignUp = () => {
   const {
@@ -72,19 +73,35 @@ const SignUp = () => {
       "ring-[#01509C]/30"
     );
   };
-  const onSubmit = (data) => {
+ const onSubmit = async (data) => {
+  try {
     setIsSubmitting(true);
-    setTimeout(() => {
-      console.log(data);
-      setIsSubmitting(false);
-    }, [1000]);
-  };
+    const roleLower=data.role.toLowerCase();
+    console.log("SIGNUP DATA:", data);
+
+    const res = await api.post("/api/auth/register", {
+      name: data.fullName,
+      email: data.email,
+      password: data.password,
+      role: roleLower,
+    });
+
+    console.log("Signup success:", res.data);
+    alert("Signup successful");
+
+  } catch (err) {
+    console.log("Signup error:", err.response?.data || err.message);
+    alert(err.response?.data?.message || "Signup failed");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
   const onError = (error) => {
     console.log(error);
   };
   return (
     <div
-      class="bg-[radial-gradient(ellipse_60%_70%_at_center,#4a9df0_0%,#01509C_65%,#013b73_100%)]
+      className="bg-[radial-gradient(ellipse_60%_70%_at_center,#4a9df0_0%,#01509C_65%,#013b73_100%)]
  w-full min-h-screen flex items-center justify-center overflow-hidden  "
     >
       <motion.div
@@ -130,6 +147,7 @@ const SignUp = () => {
                 <AnimatedInput
                   type="text"
                   placeholder="John Doe"
+                  name="fullName"
                   iconType="user"
                   register={register}
                   wrapperRef={userRef}
@@ -146,13 +164,17 @@ const SignUp = () => {
                 <AnimatedInput
                   type="email"
                   placeholder="Email"
+                  name="email"
                   iconType="mail"
                   register={register}
                   wrapperRef={wrapperRef}
                   handleFocus={handleFocus}
                   handleBlur={handleBlur}
                 />
-              </div>
+                {errors.email && (
+                    <p className="text-red-400 text-sm">{errors.email.message}</p>
+                  )}
+                </div>
             </div>
             <div className="relative flex flex-col items-start justify-center w-full gap-1.5 ">
               <label className="text-[#FFFFFF] text-base font-medium">
@@ -160,11 +182,15 @@ const SignUp = () => {
               </label>
               <div className="flex flex-col items-start justify-center w-full gap-1 ">
                 <PasswordField
+                name="password"
                   register={register}
                   handleFocus={handleFocus}
                   handleBlur={handleBlur}
                   passRef={passRef}
                 />
+                {errors.password && (
+                  <p className="text-red-400 text-sm">{errors.password.message}</p>
+                )}
               </div>
             </div>
 
@@ -174,12 +200,16 @@ const SignUp = () => {
               </label>
               <div className="flex flex-col items-start justify-center w-full gap-1 ">
                 <PasswordField
+                name="confirmPassword"
                   register={register}
                   handleFocus={handleFocus}
                   handleBlur={handleBlur}
                   passRef={conPassRef}
                 />
-              </div>
+                {errors.confirmPassword && (
+                    <p className="text-red-400 text-sm">{errors.confirmPassword.message}</p>
+                  )}
+                </div>
             </div>
 
             <div className="relative flex flex-col items-start justify-center w-full gap-1.5 ">

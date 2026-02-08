@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Lock, Eye, EyeOff } from "lucide-react";
 
-const PasswordField = ({ register, handleFocus, handleBlur, passRef }) => {
+const PasswordField = ({ register,name, handleFocus, handleBlur, passRef }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -23,7 +23,7 @@ const PasswordField = ({ register, handleFocus, handleBlur, passRef }) => {
           <motion.input
             type={showPassword ? "text" : "password"}
             placeholder="Password"
-            {...register("password", {
+            {...register(name, {
               required: "Password is required",
               minLength: {
                 value: 6,

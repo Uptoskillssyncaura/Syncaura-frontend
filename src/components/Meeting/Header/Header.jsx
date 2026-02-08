@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Bell } from 'lucide-react'
 import ToggleSwitch from "../../dashboard/Header/ToggleSwitch"
 import { FaBars } from 'react-icons/fa'
 
+
 const Header = ({ setOpen }) => {
   const [showProfile, setShowProfile] = useState(false);
+  const [user,setUser]=useState(null);
+  useEffect(()=>{
+    const u=JSON.parse(localStorage.getItem("user"));
+    setUser(u);
+  },[]);
 
   const today = new Date();
 
@@ -37,16 +43,16 @@ const Header = ({ setOpen }) => {
               text-white flex items-center justify-center font-semibold text-xl
               cursor-pointer sm:cursor-none"
             >
-              J
+              {user?.name?.charAt(0)||"U"}
             </div>
 
             <div className="hidden sm:flex flex-col items-start justify-center -space-y-1.5">
               <div className='flex gap-1 items-center justify-center text-black dark:text-white'>
                 <h1 className='font-light text-lg'>Hello!</h1>
-                <h1 className='font-semibold text-lg'>John Doe</h1>
+                <h1 className='font-semibold text-lg'>{user?.name||"User"}</h1>
               </div>
               <div className='flex items-center text-[#989696] justify-start font-semibold text-sm'>
-                Employee
+                {user?.role}
               </div>
             </div>
 
@@ -64,10 +70,10 @@ const Header = ({ setOpen }) => {
                   <div className="flex flex-col w-60 items-start justify-center -space-y-1.5">
                     <div className="flex gap-1 items-center justify-center text-black dark:text-white">
                       <h1 className="font-light text-lg">Hello!</h1>
-                      <h1 className="font-semibold text-lg">John Doe</h1>
+                      <h1 className="font-semibold text-lg">{user?.name||"User"}</h1>
                     </div>
                     <div className="flex items-center text-[#989696] justify-start font-semibold text-sm">
-                      Employee
+                     {user?.role}
                     </div>
                   </div>
                 </motion.div>

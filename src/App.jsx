@@ -22,23 +22,30 @@ import Admin from "./pages/Admin";
 import Home from "./pages/Home";
 import AdminSidebar from "./components/admin/AdminSidebar";
 import AdminHeader from "./components/admin/AdminHeader";
+import ProtectedRoute from "./routes/ProtectedRoute"
 
 export default function App() {
   return (
   
       <BrowserRouter>
         <Routes>
-          <Route path="/normal-dashboard" element={<Dashboard />} />
+          <Route path="/normal-dashboard" element={
+            <ProtectedRoute>
+            <Dashboard />
+            </ProtectedRoute>
+            } />
           <Route path="/" element={<Home />} />
           <Route
             path="/admin"
             element={
+               <ProtectedRoute>
               <MainLayout
                 SideBar={AdminSidebar}
                 TopbarComponent={AdminHeader}
               >
                 <Admin />
               </MainLayout>
+              </ProtectedRoute>
             }
           />
           <Route path="/sign-in" element={<SignIn />} />
@@ -48,11 +55,13 @@ export default function App() {
           <Route
             path="/user-dashboard"
             element={
+               <ProtectedRoute>
               <MainLayout TopbarComponent={Header} SideBar={MobileSidebar} >
                 <div className="w-full h-full">
                   <UserDashboard />
                 </div>
               </MainLayout>
+              </ProtectedRoute>
             }
           />
           <Route
