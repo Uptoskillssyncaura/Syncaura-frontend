@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from "framer-motion";
 
 const ToolsGrid = () => {
   const tools = [
@@ -26,91 +25,42 @@ const ToolsGrid = () => {
   ];
 
   return (
-    <section
-      id="features"
-      className="w-full pt-12 pb-16"
-      style={{ backgroundColor: 'var(--bg-primary)' }}
-    >
-      <div className="max-w-7xl mx-auto px-6">
-
-        {/* HEADER */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <p
-            className="text-sm font-medium mb-3"
-            style={{ color: 'var(--text-secondary)' }}
-          >
+    <section id="pricing" className="w-full pt-10 md:pt-12 pb-8 md:pb-16" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        {/* Header - Centered */}
+        <div className="text-center mb-8 md:mb-16">
+          <p className="text-xs md:text-sm font-medium mb-2 md:mb-3" style={{ color: 'var(--text-secondary)' }}>
             Tools
           </p>
-
-          <h2
-            className="text-4xl font-bold mb-4"
-            style={{ color: 'var(--text-primary)' }}
-          >
+          <h2 className="text-[34px] md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4" style={{ color: 'var(--text-primary)' }}>
             Everything you need to work
           </h2>
-
-          <p
-            className="text-base"
-            style={{ color: 'var(--text-secondary)' }}
-          >
+          <p className="text-xl md:text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
             Each feature built to save time and eliminate friction from your daily
             workflow.
           </p>
-        </motion.div>
+        </div>
 
-        {/* GRID */}
-        <motion.div
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.25 }}
-          variants={{
-            hidden: {},
-            visible: {
-              transition: { staggerChildren: 0.12 }
-            }
-          }}
-        >
+        {/* Cards - Single column on mobile, grid on larger screens */}
+        <div className="space-y-4 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-6">
           {tools.map((tool, index) => (
-            <motion.div
+            <div
               key={index}
-              className="group p-6 rounded-2xl border
-                         hover:shadow-xl transition-all duration-300
-                         hover:-translate-y-1"
-              style={{
+              className="p-5 md:p-6 rounded-2xl border hover:shadow-xl transition-all duration-300 md:hover:-translate-y-1"
+              style={{ 
                 backgroundColor: 'var(--card-bg)',
-                borderColor: 'var(--border-color)'
+                borderColor: 'var(--border-color)' 
               }}
-              variants={{
-                hidden: { opacity: 0, y: 30, scale: 0.96 },
-                visible: { opacity: 1, y: 0, scale: 1 }
-              }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              whileHover={{ scale: 1.03 }}
             >
-              <h3
-                className="text-lg font-semibold mb-3"
-                style={{ color: 'var(--text-primary)' }}
-              >
+              <h3 className="text-[17px] md:text-lg font-semibold mb-3 leading-snug" style={{ color: 'var(--text-primary)' }}>
                 {tool.title}
               </h3>
-
-              <p
-                className="text-sm leading-relaxed"
-                style={{ color: 'var(--text-secondary)' }}
-              >
+              <p className="text-[14px] md:text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 {tool.description}
               </p>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
-
+        </div>
       </div>
     </section>
   );
