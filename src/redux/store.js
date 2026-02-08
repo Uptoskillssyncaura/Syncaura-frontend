@@ -4,6 +4,7 @@ import meetingReducer from "./slices/meetingSlice";
 import projectReducer from "./slices/projectSlice";
 import notificationReducer from "./slices/notificationSlice";
 import documentReducer from "./slices/documentSlice";
+import dashboardReducer from "./slices/dashboardSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     project: projectReducer,
     notification: notificationReducer,
     documents: documentReducer,
+    dashboard: dashboardReducer,
   },
 });

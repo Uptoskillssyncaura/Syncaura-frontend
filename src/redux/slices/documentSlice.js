@@ -3,7 +3,7 @@ import {
   fetchDocuments,
   createDocument,
   deleteDocument,
-} from "../thunks/documentThunks";
+} from "../features/documentThunks";
 
 const initialState = {
   documents: [],

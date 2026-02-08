@@ -6,7 +6,7 @@ import VersionHistoryDrawer from "../components/Document/DetailAboutDcument/Vers
 import { AnimatePresence, motion } from "framer-motion";
 import DocumentFilter from "../components/Document/DocumentFilter";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDocuments } from "../redux/thunks/documentThunks";
+import { fetchDocuments } from "../redux/features/documentThunks";
 
 export default function Documents() {
   const dispatch = useDispatch();

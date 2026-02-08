@@ -31,6 +31,17 @@ export default function App() {
           <Route path="/normal-dashboard" element={<Dashboard />} />
           <Route path="/" element={<Home />} />
           <Route
+            path="/dashboard"
+            element={
+              <MainLayout
+                SideBar={AdminSidebar}
+                TopbarComponent={AdminHeader}
+              >
+                <Admin />
+              </MainLayout>
+            }
+          />
+          <Route
             path="/admin"
             element={
               <MainLayout
