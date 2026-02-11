@@ -5,6 +5,7 @@ import MainLayout from "./layouts/MainLayout";
 
 import Projects from "./pages/Projects";
 import Tasks from "./pages/Tasks";
+import CurrentMeet from "./pages/CurrentMeet";
 import Meetings from "./pages/Meetings";
 import Chat from "./pages/Chat";
 import Documents from "./pages/Documents";
@@ -50,6 +51,7 @@ export default function App() {
           />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
+           <Route path="/meet/:id" element={<CurrentMeet />} />
 
           {/* User dashboard with a different Topbar */}
           <Route

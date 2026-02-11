@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Sun, Moon, Menu, X as XIcon } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
 import { useDarkMode } from "../../hooks/useDarkMode";
 import {Link} from "react-router-dom";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useDarkMode();
   const [activeSection, setActiveSection] = useState('home');
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,22 +33,21 @@ const Navbar = () => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setMobileMenuOpen(false);
     }
   };
 
   return (
-    <header className="w-full border-b sticky top-0 z-50" style={{ 
-      backgroundColor: 'var(--bg-primary)', 
-      borderColor: 'var(--border-color)' 
+    <header className="w-full sticky top-0 z-50" style={{ 
+      backgroundColor: 'var(--bg-primary)'
     }}>
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      {/* Desktop/Tablet */}
+      <div className="hidden md:flex max-w-7xl mx-auto px-6 h-20 items-center justify-between border-b" style={{ borderColor: 'var(--border-color)' }}>
         <div className="gap-20 flex items-center">
           <div className="text-2xl font-bold" style={{ color: 'var(--accent-color)' }}>
             FLOWBIT
           </div>
 
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="flex items-center gap-8">
             <a 
               href="#home" 
               onClick={(e) => scrollToSection(e, 'home')}
@@ -74,7 +72,7 @@ const Navbar = () => {
             </a>
             <a 
               href="#pricing" 
-              onClick={(e) => scrollToSection(e, '')}
+              onClick={(e) => scrollToSection(e, 'pricing')}
               className="text-sm font-medium border-b-2 pb-1 transition-all" 
               style={{ 
                 color: activeSection === 'pricing' ? 'var(--accent-color)' : 'var(--text-secondary)', 
@@ -110,15 +108,21 @@ const Navbar = () => {
             )}
           </button>
 
+
           <Link
           to="/sign-in"
             className="hidden md:block text-sm font-medium hover:opacity-80 transition-opacity"
             style={{ color: 'var(--accent-color)' }}
           >
+
+          <a href="#login" className="text-sm font-medium hover:opacity-80 transition-opacity" style={{ 
+            color: 'var(--accent-color)' 
+          }}>
+
             Login
           </Link>
           <button
-            className="hidden md:block px-6 py-2 text-sm font-medium rounded-md hover:opacity-90 transition-opacity"
+            className="px-6 py-2 text-sm font-medium rounded-md hover:opacity-90 transition-opacity"
             style={{
               backgroundColor: "var(--accent-color)",
               color: "var(--bg-primary)",
@@ -126,78 +130,81 @@ const Navbar = () => {
           >
             Start Free
           </button>
-
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden w-9 h-9 flex items-center justify-center"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? (
-              <XIcon className="w-6 h-6" style={{ color: 'var(--text-primary)' }} />
-            ) : (
-              <Menu className="w-6 h-6" style={{ color: 'var(--text-primary)' }} />
-            )}
-          </button>
         </div>
       </div>
 
-      {mobileMenuOpen && (
-        <div className="md:hidden border-t" style={{ 
-          backgroundColor: 'var(--bg-primary)',
-          borderColor: 'var(--border-color)' 
-        }}>
-          <nav className="px-6 py-4 space-y-4">
+      {/* Mobile - EXACT Figma Design */}
+      <div className="md:hidden">
+        {/* Top Row: Logo + Start Free Button */}
+        <div className="flex items-center justify-between px-6 py-5">
+          <div className="text-[23px] font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+            FLOWBIT
+          </div>
+          
+          <button
+            className="px-4 py-1 text-s font-medium rounded-[10px]"
+            style={{
+              backgroundColor: "var(--accent-color)",
+              color: "var(--bg-primary)",
+            }}
+          >
+            Start Free
+          </button>
+        </div>
+
+        {/* Navigation Links Container - Centered with Border */}
+        <div className="flex justify-center px-4 py-5 pb-3">
+          <nav 
+            className="inline-flex items-center gap-5 px-6 py-2.5 rounded-[15px] border overflow-x-auto"
+            style={{ 
+              borderColor: 'var(--border-color)',
+              backgroundColor: 'var(--bg-primary)'
+            }}
+          >
             <a 
               href="#home" 
               onClick={(e) => scrollToSection(e, 'home')}
-              className="block text-sm font-medium" 
-              style={{ color: 'var(--text-primary)' }}
+              className="text-sm font-medium whitespace-nowrap border-b-2 pb-0.5 transition-all"
+              style={{ 
+                color: activeSection === 'home' ? 'var(--accent-color)' : 'var(--text-secondary)',
+                borderColor: activeSection === 'home' ? 'var(--accent-color)' : 'transparent'
+              }}
             >
               Home
             </a>
             <a 
               href="#features" 
               onClick={(e) => scrollToSection(e, 'features')}
-              className="block text-sm font-medium" 
-              style={{ color: 'var(--text-primary)' }}
+              className="text-sm font-medium whitespace-nowrap"
+              style={{ 
+                color: activeSection === 'features' ? 'var(--accent-color)' : 'var(--text-secondary)'
+              }}
             >
               Features
             </a>
             <a 
               href="#pricing" 
               onClick={(e) => scrollToSection(e, 'pricing')}
-              className="block text-sm font-medium" 
-              style={{ color: 'var(--text-primary)' }}
+              className="text-sm font-medium whitespace-nowrap"
+              style={{ 
+                color: activeSection === 'pricing' ? 'var(--accent-color)' : 'var(--text-secondary)'
+              }}
             >
               Pricing
             </a>
             <a 
               href="#contact" 
               onClick={(e) => scrollToSection(e, 'contact')}
-              className="block text-sm font-medium" 
-              style={{ color: 'var(--text-primary)' }}
+              className="text-sm font-medium whitespace-nowrap"
+              style={{ 
+                color: activeSection === 'contact' ? 'var(--accent-color)' : 'var(--text-secondary)'
+              }}
             >
               Contact
             </a>
-            <a 
-              href="#login" 
-              className="block text-sm font-medium" 
-              style={{ color: 'var(--accent-color)' }}
-            >
-              Login
-            </a>
-            <button
-              className="w-full px-6 py-2 text-sm font-medium rounded-md"
-              style={{
-                backgroundColor: "var(--accent-color)",
-                color: "var(--bg-primary)",
-              }}
-            >
-              Start Free
-            </button>
           </nav>
         </div>
-      )}
+      </div>
     </header>
   );
 };
