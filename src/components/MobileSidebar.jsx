@@ -21,8 +21,8 @@ import {
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {useNavigate} from "react-router-dom";
-
-
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../redux/features/authThunks"; // adjust path
 
 const menuItems = [
     { label: "Dashboard", icon: LayoutDashboard, path: "/user-dashboard", count: 0 },
@@ -42,14 +42,17 @@ const menuItems = [
 export default function MobileSidebar({ open, setOpen }) {
     const navigate=useNavigate();
     const { isDark } = useSelector((state)=>state.theme.isDark)
-    const logOutHandle = () => {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        localStorage.removeItem("user");
-        console.log('LogOut SUccessfully');
-        navigate("/sign-in");
-    }
+    
+const dispatch = useDispatch();
 
+const logOutHandle = async () => {
+  try {
+    await dispatch(logoutUser()).unwrap();
+    navigate("/sign-in");
+  } catch (error) {
+    console.log("Logout failed", error);
+  }
+};
     return (
         <>
 

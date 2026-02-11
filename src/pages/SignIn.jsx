@@ -7,18 +7,34 @@ import PasswordField from "../components/auth/PasswordField";
 import { Link } from "react-router-dom";
 import AnimatedInput from "../components/auth/AnimatedInput";
 import { useNavigate } from "react-router-dom";
-import api from "../services/api";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../redux/features/authThunks";
+import { useEffect } from "react";
 
 const SignIn = () => {
   const navigate=useNavigate();
+  const dispatch = useDispatch();
+const { user, isLoading, error, isAuthenticated } = useSelector(
+  (state) => state.auth
+);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const [isSubmitting, setIsSubmitting]=useState(false)
-  const [errorMsg,setErrorMsg]=useState("")
+
+  useEffect(() => {
+  if (isAuthenticated && user) {
+    if (user.role === "admin") {
+      navigate("/admin");
+    } else if (user.role === "co-admin") {
+      navigate("/normal-dashboard");
+    } else {
+      navigate("/user-dashboard");
+    }
+  }
+}, [isAuthenticated, user,navigate]);
   
   const wrapperRef = useRef(null);
   const passRef = useRef(null);
@@ -57,51 +73,10 @@ const SignIn = () => {
       "ring-[#01509C]/30"
     );
   };
-  const onSubmit = async (data) => {
-    setErrorMsg("");
-    console.log(data);
-  try {
-    setIsSubmitting(true);
 
-    const res = await api.post("/api/auth/login", {
-      email: data.email,
-      password: data.password,
-    });
-
-    console.log("FULL RESPONSE:",res.data);
-    
-
-    const { user, tokens } = res.data;
-    console.log("USER ROLE=",user.role);
-    // 🔐 Save auth data
-    localStorage.setItem("accessToken", tokens.accessToken);
-    localStorage.setItem("refreshToken", tokens.refreshToken);
-    localStorage.setItem("user", JSON.stringify(user));
-    
-    // 🚀 Role-based redirect
-    if (user.role === "admin") {
-      navigate("/admin");
-    } else if (user.role === "co-admin") {
-      navigate("/normal-dashboard");
-    } else {
-      navigate("/user-dashboard");
-    }
-
-  } catch (error) {
-  console.error("Login failed:", error.response?.data || error.message);
-
-  if (error.response?.status === 401) {
-    setErrorMsg("Invalid email or password");
-  } else if (error.response?.status === 404) {
-    setErrorMsg("API route not found");
-  } else {
-    setErrorMsg("Server error. Try again later");
-  }
-}
-  finally {
-    setIsSubmitting(false);
-  }
-};
+  const onSubmit = (data) => {
+  dispatch(loginUser(data));
+  };
   const onError = (error) => {
     console.log(error);
   };
@@ -173,8 +148,8 @@ const SignIn = () => {
                   </p>
                 </div>
                
-                    {errorMsg && (
-                      <p className="text-red-500 text-sm font-semibold">{errorMsg}</p>
+                    {error && (
+                      <p className="text-red-500 text-sm font-semibold">{error}</p>
                     )}
                 </div>
             </div>
@@ -196,14 +171,14 @@ const SignIn = () => {
             >
               <motion.button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isLoading}
                 whileHover={{ y: -1 }}
                 whileTap={{ y: 1 }}
                 transition={{ type: "spring", stiffness: 400 }}
                 
                 className="text-[#F8F8F8] font-bold text-lg"
               >
-               {isSubmitting ? <Loader className="size-5 text-white animate-spin" /> : " Sign In"}
+               {isLoading ? <Loader className="size-5 text-white animate-spin" /> : " Sign In"}
               </motion.button>
             </motion.div>
             <div className="flex relative items-center justify-center w-full top-2 ">

@@ -6,7 +6,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import PasswordField from "../components/auth/PasswordField";
 import { Link } from "react-router-dom";
 import AnimatedInput from "../components/auth/AnimatedInput";
-import api from "../services/api";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../redux/features/authThunks";
+import { useNavigate } from "react-router-dom";
+
 
 const SignUp = () => {
   const {
@@ -21,7 +24,20 @@ const SignUp = () => {
     },
   });
   const roles = ["User", "Admin", "Co-Admin"];
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const dispatch = useDispatch();
+  const navigate=useNavigate();
+  const { user, isLoading, error, isAuthenticated } = useSelector((state) => state.auth);
+  useEffect(() => {
+  if (isAuthenticated && user) {
+    if (user.role === "admin") {
+      navigate("/admin");
+    } else if (user.role === "co-admin") {
+      navigate("/normal-dashboard");
+    } else {
+      navigate("/user-dashboard");
+    }
+  }
+}, [isAuthenticated, user, navigate]);
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
   useEffect(() => {
@@ -73,28 +89,17 @@ const SignUp = () => {
       "ring-[#01509C]/30"
     );
   };
- const onSubmit = async (data) => {
-  try {
-    setIsSubmitting(true);
-    const roleLower=data.role.toLowerCase();
-    console.log("SIGNUP DATA:", data);
+ const onSubmit = (data) => {
+  const roleLower = data.role.toLowerCase();
 
-    const res = await api.post("/api/auth/register", {
+  dispatch(
+    registerUser({
       name: data.fullName,
       email: data.email,
       password: data.password,
       role: roleLower,
-    });
-
-    console.log("Signup success:", res.data);
-    alert("Signup successful");
-
-  } catch (err) {
-    console.log("Signup error:", err.response?.data || err.message);
-    alert(err.response?.data?.message || "Signup failed");
-  } finally {
-    setIsSubmitting(false);
-  }
+    })
+  );
 };
   const onError = (error) => {
     console.log(error);
@@ -294,13 +299,13 @@ const SignUp = () => {
             >
               <motion.button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isLoading}
                 whileHover={{ y: -1 }}
                 whileTap={{ y: 1 }}
                 transition={{ type: "spring", stiffness: 400 }}
                 className="text-[#000000] font-bold text-lg"
               >
-                {isSubmitting ? (
+                {isLoading ? (
                   <Loader className="size-5 text-[#000000] animate-spin" />
                 ) : (
                   " Create Account"

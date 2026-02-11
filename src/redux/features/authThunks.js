@@ -20,6 +20,7 @@ export const loginUser = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const res = await api.post("/auth/login", credentials);
+      console.log("LOGIN RESPONCE:",res.data);
       return res.data;
     } catch (err) {
       return rejectWithValue(
@@ -31,16 +32,11 @@ export const loginUser = createAsyncThunk(
 
 export const logoutUser = createAsyncThunk(
   "auth/logoutUser",
-  async (_, { rejectWithValue }) => {
-    try {
-      const res = await api.post("/auth/logout");
-      return res.data;
-    } catch (err) {
-      return rejectWithValue(
-        err.response?.data?.message || "Failed to logout",
-      );
-    }
-  },
+  async () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("user");
+    return true;
+  }
 );
 
 export const getCurrentUser = createAsyncThunk(
