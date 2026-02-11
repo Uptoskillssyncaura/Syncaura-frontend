@@ -1,17 +1,25 @@
+
 import { useState,useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Bell } from 'lucide-react'
 import ToggleSwitch from "../../dashboard/Header/ToggleSwitch"
 import { FaBars } from 'react-icons/fa'
 
+import { useState } from "react";
+import ToggleSwitch from "../../dashboard/Header/ToggleSwitch";
+
+
 
 const Header = ({ setOpen }) => {
+
   const [showProfile, setShowProfile] = useState(false);
   const [user,setUser]=useState(null);
   useEffect(()=>{
     const u=JSON.parse(localStorage.getItem("user"));
     setUser(u);
   },[]);
+
+
 
   const today = new Date();
 
@@ -26,17 +34,14 @@ const Header = ({ setOpen }) => {
   });
 
   return (
-    <div className='text-black py-3  bg-[#FFFFFF] dark:bg-[#2E2F2F] shadow-[0_10px_20px_-10px_rgba(0,0,0,0.25)] w-full flex items-center justify-end z-50'>
-      <div className='w-full flex items-center justify-between px-4'>
-
-        <div className="flex items-center justify-center gap-5">
-          <button className="lg:hidden" onClick={() => setOpen(true)}>
-            <FaBars className="text-2xl sm:text-3xl text-[#333] dark:text-gray-400" />
-          </button>
-
+    <div className="text-black py-3 bg-[#FFFFFF] dark:bg-[#2E2F2F] shadow-[0_10px_20px_-10px_rgba(0,0,0,0.25)] w-full flex items-center justify-end z-50">
+      <div className="w-full flex items-center justify-between px-3 sm:px-4 lg:px-6">
+        {/* LEFT SECTION */}
+        <div className="flex items-center gap-3 sm:gap-5">
           {/* Profile Section */}
-          <div className="flex gap-2 items-center justify-center relative">
+          <div className="flex gap-2 items-center">
             {/* Avatar */}
+
             <div
               onClick={() => setShowProfile(prev => !prev)}
               className="size-12 rounded-full bg-linear-to-b from-red-600 to-red-900
@@ -80,20 +85,49 @@ const Header = ({ setOpen }) => {
               )}
             </AnimatePresence>
 
+
+            <div className="size-10 sm:size-12 rounded-full bg-gradient-to-b from-red-600 to-red-900 text-white flex items-center justify-center font-semibold text-lg sm:text-xl">
+              J
+            </div>
+
+            {/* Profile Text */}
+            <div className="flex flex-col">
+              <div className="flex gap-1 items-center text-black dark:text-white">
+                <h1 className="font-light text-base sm:text-lg">Hello!</h1>
+                <h1 className="font-semibold text-base sm:text-lg">John Doe</h1>
+              </div>
+              <div className="text-[#989696] font-semibold text-xs sm:text-sm -mt-1">
+                Employee
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-4">
-          <div className="flex text-base dark:text-[#FFFFFF] items-center justify-center gap-1.5">
-            <h1 className='font-bold'>{dayName}</h1>
-            <h1 className='font-light'> | {formattedDate}</h1>
+        {/* RIGHT SECTION */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 items-end">
+          {/* Desktop date */}
+          <div className="hidden xsm:flex items-center gap-2 text-base dark:text-white">
+            <div className="flex items-center justify-center gap-1.5 ">
+              <span className="font-bold">{dayName}</span>
+              <span className="font-light"> | {formattedDate}</span>
+            </div>
+            <ToggleSwitch />
           </div>
-          <ToggleSwitch />
-        </div>
 
+          {/* Mobile toggle and date below */}
+          <div className="xsm:hidden flex flex-col items-center">
+            <ToggleSwitch />
+          </div>
+
+          {/* Desktop toggle */}
+          {/* <div className="hidden xsm:block">
+            <ToggleSwitch />
+          </div> */}
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Header;

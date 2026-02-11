@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Facebook, Instagram, X, Linkedin, Youtube } from 'lucide-react';
-import { motion } from "framer-motion";
 
 const Footer = () => {
   const [footerEmail, setFooterEmail] = useState('');
@@ -8,7 +7,7 @@ const Footer = () => {
 
   const handleFooterSubmit = (e) => {
     e.preventDefault();
-
+    
     if (!footerEmail) {
       setFooterStatus('Please enter an email address');
       return;
@@ -22,179 +21,201 @@ const Footer = () => {
 
     setFooterStatus('Subscribed successfully!');
     setFooterEmail('');
-
+    
     setTimeout(() => {
       setFooterStatus('');
     }, 3000);
   };
 
   return (
-    <footer
-      className="w-full border-t"
-      style={{
+    <>
+     
+
+      {/* Footer */}
+      <footer className="w-full border-t" style={{ 
         backgroundColor: 'var(--bg-primary)',
-        borderColor: 'var(--border-color)'
-      }}
-    >
-      <div className="max-w-[1280px] mx-auto px-20 py-16">
+        borderColor: 'var(--border-color)' 
+      }}>
+        <div className="max-w-[1280px] mx-auto px-6 sm:px-8 md:px-10 lg:px-20 py-8 sm:py-10 md:py-12 lg:py-16">
+          
+          {/* DESKTOP Layout - Show at 1020px and above */}
+          <div className="hidden min-[1020px]:grid min-[1020px]:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-10 md:gap-12 lg:gap-20">
+            
+            {/* FlowBit Section */}
+            <div className="space-y-4">
+              <h3 className="text-xl md:text-2xl font-bold" style={{ color: 'var(--accent-color)' }}>FlowBit</h3>
+              <p className="text-sm max-w-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                Get updates on new features and product releases.
+              </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-20">
+              {/* Email Form */}
+              <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3">
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  value={footerEmail}
+                  onChange={(e) => setFooterEmail(e.target.value)}
+                  className="w-full md:w-[280px] lg:w-[344px] h-[44px] px-4 border rounded-lg text-sm focus:outline-none focus:ring-2"
+                  style={{ 
+                    backgroundColor: 'var(--bg-primary)',
+                    borderColor: 'var(--border-color)',
+                    color: 'var(--text-primary)'
+                  }}
+                />
+                <button 
+                  onClick={handleFooterSubmit}
+                  className="w-full md:w-auto h-[44px] px-6 border text-sm font-medium rounded-lg transition hover:opacity-90" 
+                  style={{ 
+                    borderColor: 'var(--accent-color)',
+                    backgroundColor: 'var(--accent-color)',
+                    color: "var(--bg-primary)"
+                  }}
+                >
+                  Subscribe
+                </button>
+              </div>
 
-          {/* Logo + Subscribe */}
-          <motion.div
-            className="space-y-4"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            <h3 className="text-2xl font-bold" style={{ color: 'var(--accent-color)' }}>
-              FlowBit
-            </h3>
-            <p className="text-sm max-w-sm" style={{ color: 'var(--text-secondary)' }}>
-              Get updates on new features and product releases.
-            </p>
+              {footerStatus && (
+                <p className="text-xs" style={{ color: footerStatus.includes('success') ? 'green' : 'red' }}>
+                  {footerStatus}
+                </p>
+              )}
 
-            <motion.div
-              className="flex items-center gap-3"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <input
-                type="email"
-                placeholder="Your email"
-                value={footerEmail}
-                onChange={(e) => setFooterEmail(e.target.value)}
-                className="w-[344px] h-[44px] px-4 border rounded-md text-sm focus:outline-none focus:ring-2"
-                style={{
-                  backgroundColor: 'var(--bg-primary)',
-                  borderColor: 'var(--border-color)',
-                  color: 'var(--text-primary)'
-                }}
-              />
-              <motion.button
-                onClick={handleFooterSubmit}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="h-[44px] px-6 border text-sm font-medium rounded-md transition text-white"
-                style={{
-                  borderColor: 'var(--accent-color)',
-                  backgroundColor: 'var(--accent-color)',
-                  color: "var(--bg-primary)"
-                }}
-              >
-                Subscribe
-              </motion.button>
-            </motion.div>
+              <p className="text-xs max-w-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                You agree to our Privacy Policy and consent to receive company updates.
+              </p>
+            </div>
 
-            {footerStatus && (
-              <motion.p
-                className="text-xs"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                style={{
-                  color: footerStatus.includes('success') ? '#22c55e' : '#ef4444'
-                }}
-              >
-                {footerStatus}
-              </motion.p>
-            )}
+            {/* Product Section */}
+            <div>
+              <h4 className="text-sm font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Product</h4>
+              <ul className="space-y-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
+                {["Features", "Pricing", "Security", "Roadmap", "Company"].map(item => (
+                  <li key={item} className="hover:opacity-70 cursor-pointer transition">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-            <motion.p
-              className="text-xs max-w-sm"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              You agree to our Privacy Policy and consent to receive company updates.
-            </motion.p>
-          </motion.div>
+            {/* About Section */}
+            <div>
+              <h4 className="text-sm font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>About</h4>
+              <ul className="space-y-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
+                {["Blog", "Careers", "Contact", "Follow us", "Facebook"].map(item => (
+                  <li key={item} className="hover:opacity-70 cursor-pointer transition">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Product Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <h4 className="text-sm font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Product</h4>
-            <ul className="space-y-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
-              {["Features", "Pricing", "Security", "Roadmap", "Company"].map(item => (
-                <li key={item} className="hover:opacity-70 cursor-pointer">{item}</li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* About Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <h4 className="text-sm font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>About</h4>
-            <ul className="space-y-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
-              {["Blog", "Careers", "Contact", "Follow us", "Facebook"].map(item => (
-                <li key={item} className="hover:opacity-70 cursor-pointer">{item}</li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <h4 className="text-sm font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Instagram</h4>
-            <ul className="space-y-4 text-sm" style={{ color: 'var(--text-secondary)' }}>
-              {[
-                { icon: <Facebook size={16} />, label: "Facebook" },
-                { icon: <X size={16} />, label: "X" },
-                { icon: <Instagram size={16} />, label: "Instagram" },
-                { icon: <Linkedin size={16} />, label: "LinkedIn" },
-                { icon: <Youtube size={16} />, label: "YouTube" },
-              ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 hover:opacity-70 cursor-pointer">
-                  {item.icon} {item.label}
+            {/* Social Section */}
+            <div>
+              <h4 className="text-sm font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Instagram</h4>
+              <ul className="space-y-4 text-sm" style={{ color: 'var(--text-secondary)' }}>
+                <li className="flex items-center gap-3 hover:opacity-70 cursor-pointer transition">
+                  <Facebook size={16} /> Facebook
                 </li>
-              ))}
-            </ul>
+                <li className="flex items-center gap-3 hover:opacity-70 cursor-pointer transition">
+                  <X size={16} /> X
+                </li>
+                <li className="flex items-center gap-3 hover:opacity-70 cursor-pointer transition">
+                  <Instagram size={16} /> Instagram
+                </li>
+                <li className="flex items-center gap-3 hover:opacity-70 cursor-pointer transition">
+                  <Linkedin size={16} /> LinkedIn
+                </li>
+                <li className="flex items-center gap-3 hover:opacity-70 cursor-pointer transition">
+                  <Youtube size={16} /> YouTube
+                </li>
+              </ul>
 
-            <p className="text-xs mt-6" style={{ color: 'var(--text-secondary)' }}>
-              © 2025 Flowbit. All rights reserved.
-            </p>
-          </motion.div>
-        </div>
-
-        {/* Footer Bottom */}
-        <motion.div
-          className="mt-16 border-t pt-6 flex items-center justify-between text-sm"
-          style={{
-            borderColor: 'var(--border-color)',
-            color: 'var(--text-secondary)'
-          }}
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <span>Terms of Service</span>
-          <div className="flex gap-6">
-            <span className="hover:opacity-70 cursor-pointer">Cookies Settings</span>
-            <span className="hover:opacity-70 cursor-pointer">Terms of service</span>
-            <span className="hover:opacity-70 cursor-pointer">Privacy policy</span>
+              <p className="text-xs mt-6" style={{ color: 'var(--text-secondary)' }}>
+                © 2025 Flowbit. All rights reserved.
+              </p>
+            </div>
           </div>
-        </motion.div>
 
-      </div>
-    </footer>
+          {/* MOBILE Layout - Show below 1020px */}
+          <div className="grid grid-cols-3 gap-6 sm:gap-8 min-[1020px]:hidden px-2 sm:px-0">
+            
+            {/* Product Column */}
+            <div className="pr-2">
+              <h4 className="text-xs sm:text-sm font-semibold mb-3 sm:mb-4" style={{ color: 'var(--text-primary)' }}>
+                Product
+              </h4>
+              <ul className="space-y-2.5 sm:space-y-3 text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+                <li className="hover:opacity-70 cursor-pointer transition">Features</li>
+                <li className="hover:opacity-70 cursor-pointer transition">Pricing</li>
+                <li className="hover:opacity-70 cursor-pointer transition">Security</li>
+                <li className="hover:opacity-70 cursor-pointer transition">Roadmap</li>
+                <li className="hover:opacity-70 cursor-pointer transition">Company</li>
+              </ul>
+            </div>
+
+            {/* About Column */}
+            <div className="pr-2">
+              <h4 className="text-xs sm:text-sm font-semibold mb-3 sm:mb-4" style={{ color: 'var(--text-primary)' }}>
+                About
+              </h4>
+              <ul className="space-y-2.5 sm:space-y-3 text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+                <li className="hover:opacity-70 cursor-pointer transition">Blog</li>
+                <li className="hover:opacity-70 cursor-pointer transition">Careers</li>
+                <li className="hover:opacity-70 cursor-pointer transition">Contact</li>
+                <li className="hover:opacity-70 cursor-pointer transition">Follow us</li>
+                <li className="hover:opacity-70 cursor-pointer transition">Facebook</li>
+              </ul>
+            </div>
+
+            {/* Social Icons Column */}
+            <div>
+              <h4 className="text-xs sm:text-sm font-semibold mb-3 sm:mb-4 invisible">Social</h4>
+              <ul className="space-y-2.5 sm:space-y-3 text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+                <li className="flex items-center gap-1.5 sm:gap-2 hover:opacity-70 cursor-pointer transition">
+                  <Facebook size={14} className="flex-shrink-0" /> 
+                  <span className="truncate text-[11px] sm:text-xs">Facebook</span>
+                </li>
+                <li className="flex items-center gap-1.5 sm:gap-2 hover:opacity-70 cursor-pointer transition">
+                  <Instagram size={14} className="flex-shrink-0" />
+                  <span className="truncate text-[11px] sm:text-xs">Instagram</span>
+                </li>
+                <li className="flex items-center gap-1.5 sm:gap-2 hover:opacity-70 cursor-pointer transition">
+                  <X size={14} className="flex-shrink-0" /> 
+                  <span className="truncate text-[11px] sm:text-xs">X</span>
+                </li>
+                <li className="flex items-center gap-1.5 sm:gap-2 hover:opacity-70 cursor-pointer transition">
+                  <Linkedin size={14} className="flex-shrink-0" />
+                  <span className="truncate text-[11px] sm:text-xs">LinkedIn</span>
+                </li>
+                <li className="flex items-center gap-1.5 sm:gap-2 hover:opacity-70 cursor-pointer transition">
+                  <Youtube size={14} className="flex-shrink-0" />
+                  <span className="truncate text-[11px] sm:text-xs">YouTube</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Section - Same for both mobile and desktop */}
+          <div className="mt-8 sm:mt-10 md:mt-16 border-t pt-6 sm:pt-8" style={{ borderColor: 'var(--border-color)' }}>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 px-2 sm:px-0">
+              {/* Left: Terms of Service */}
+              <div className="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+                Terms of Service
+              </div>
+              
+              {/* Right: Links */}
+              <div className="flex flex-wrap gap-x-4 sm:gap-x-6 gap-y-2 text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+                <span className="hover:opacity-70 cursor-pointer underline">Cookies Settings</span>
+                <span className="hover:opacity-70 cursor-pointer underline">Terms of service</span>
+                <span className="hover:opacity-70 cursor-pointer underline">Privacy policy</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </footer>
+    </>
   );
 };
 
