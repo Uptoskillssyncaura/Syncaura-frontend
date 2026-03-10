@@ -74,7 +74,7 @@ const UserDashboard = () => {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: direction === 1 ? -300 : 300, opacity: 0 }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="absolute inset-0 overflow-y-auto rounded-xl  p-6"
+            className="absolute inset-0 overflow-y-auto no-scrollbar rounded-xl p-6"
           >
         
            {selectedTab === "Dashboard" && <Dashboard/>}

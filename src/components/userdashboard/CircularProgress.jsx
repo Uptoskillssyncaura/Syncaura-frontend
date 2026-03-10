@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 const CircularProgress = ({
   percentage = 75,
   size = 160,
-  data=null,
+  data = null,
   strokeWidth = 25,
-  progressColor = "#1E73E8",
-  trackColor = "#EEF2F6",
+  progressColor = "#00E5FF",
+  trackColor = "#222222",
   startAngle = -90,
   showText = true,
   label = "FINISHED",
@@ -15,7 +15,7 @@ const CircularProgress = ({
   labelColor = "#9CA3AF",
   fontSize = 28,
   duration = 2,
-  textSize=15,
+  textSize = 15,
 }) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -25,7 +25,7 @@ const CircularProgress = ({
 
   return (
     <div
-      className="relative flex items-center justify-center"
+      className="relative flex items-center justify-center bg-[#1E1E1E] rounded-full"
       style={{ width: size, height: size }}
     >
       <svg
@@ -52,7 +52,6 @@ const CircularProgress = ({
           stroke={progressColor}
           strokeWidth={strokeWidth}
           fill="none"
-        //   strokeLinecap="round"
           strokeDasharray={circumference}
           initial={{ strokeDashoffset: circumference }}
           animate={{ strokeDashoffset: progressOffset }}
@@ -70,10 +69,10 @@ const CircularProgress = ({
             style={{ fontSize, color: textColor }}
             className="font-bold"
           >
-            { data ?? `${percentage}%`}
+            {data ?? `${percentage}%`}
           </span>
           <span
-            style={{fontSize: textSize, color: labelColor }}
+            style={{ fontSize: textSize, color: labelColor }}
             className="text-xs font-semibold"
           >
             {label}

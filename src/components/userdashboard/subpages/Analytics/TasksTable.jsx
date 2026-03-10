@@ -84,6 +84,7 @@ const isDueSoon = (date) => {
   const diff = (due - today) / (1000 * 60 * 60 * 24);
   return diff <= 5;
 };
+
 const statusIcon = {
   "In Progress": (
     <div className="flex items-center justify-center p-0.5 rounded-full bg-[#137FEC] ">
@@ -98,7 +99,7 @@ const statusIcon = {
   ),
   Done: (
     <div className="flex items-center justify-center p-0.5 rounded-full bg-[#1BC963] ">
-      <Check className="size-3 text-white dark:text-gray-900" />{" "}
+      <Check className="size-3 text-white dark:text-gray-900" />
     </div>
   ),
 };
@@ -121,13 +122,13 @@ export default function TasksTable() {
   const totalPages = Math.ceil(tasks.length / perPage);
 
   return (
-    <div className="w-full overflow-x-auto rounded-xl bg-white dark:bg-[#1E1E1E] shadow">
+    <div className="w-full overflow-x-auto rounded-xl bg-[#1E1E1E] shadow">
       <h2 className="px-6 py-4 text-2xl font-bold text-[#6E7184] dark:text-gray-100">
         Tasks
       </h2>
 
       <table className="min-w-[1000px] w-full text-sm">
-        <thead className="bg-[#F3F8FD] dark:bg-gray-800 border-t border-b border-[#EFF4F8]">
+        <thead className="bg-[#2A2A2A] dark:bg-gray-800 border-t border-b border-[#EFF4F8]">
           <tr className="text-left text-[#697D92] dark:text-gray-400 uppercase ">
             <th></th>
             <th className="py-3">Task Name</th>
@@ -153,13 +154,7 @@ export default function TasksTable() {
               <td className="p-4">
                 <input
                   type="checkbox"
-                  className="
-    w-4 h-4
-    rounded-xl
-    accent-blue-600
-    dark:accent-blue-400
-    cursor-pointer
-  "
+ className="w-4 h-4 appearance-none border-2 border-gray-500 bg-[#1E1E1E] rounded cursor-pointer relative checked:bg-green-600 checked:border-green-600 before:content-[''] before:absolute before:w-[5px] before:h-[9px] before:border-white before:border-r-2 before:border-b-2 before:rotate-45 before:left-[4px] before:top-[1px] before:opacity-0 checked:before:opacity-100"
                 />
               </td>
               <td className="font-medium text-gray-800 dark:text-gray-100">
@@ -168,12 +163,12 @@ export default function TasksTable() {
               <td className="text-gray-600 dark:text-gray-300">
                 {task.project}
               </td>
-              <td className="flex" >
+              <td className="flex">
                 <div
-                  className={`flex items-center gap-2 justify-center px-3 py-1 rounded-full text-xs font-semibold ${statusStyles[task.status]} `}
+                  className={`flex items-center gap-2 justify-center px-3 py-1 rounded-full text-xs font-semibold ${statusStyles[task.status]}`}
                 >
                   {statusIcon[task.status]}
-                  <h2 className={``}>{task.status}</h2>
+                  <h2>{task.status}</h2>
                 </div>
               </td>
               <td>
@@ -184,7 +179,11 @@ export default function TasksTable() {
                 </span>
               </td>
               <td
-                className={`flex items-center gap-1 mt-4 ${isDueSoon(task.dueDate) ? "text-red-600 font-semibold" : "text-gray-600 dark:text-gray-300"}`}
+                className={`flex items-center gap-1 mt-4 ${
+                  isDueSoon(task.dueDate)
+                    ? "text-red-600 font-semibold"
+                    : "text-gray-600 dark:text-gray-300"
+                }`}
               >
                 {isDueSoon(task.dueDate) && <Clock size={14} />}
                 {formatDate(task.dueDate)}
@@ -200,7 +199,7 @@ export default function TasksTable() {
         </tbody>
       </table>
 
-      <div className="flex bg-[#F3F8FD] items-center justify-between px-6 py-2 text-sm text-gray-600 dark:text-gray-300">
+      <div className="flex bg-[#2E2E2E] items-center justify-between px-6 py-2 text-sm text-gray-600 dark:text-gray-300">
         <span>
           Showing {(page - 1) * perPage + 1}–
           {Math.min(page * perPage, tasks.length)} of {tasks.length} tasks

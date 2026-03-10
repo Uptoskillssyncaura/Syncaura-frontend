@@ -1,4 +1,3 @@
-
 import { Check, CircleAlert, ClipboardListIcon, EllipsisIcon, FolderClosedIcon } from 'lucide-react'
 import React from 'react'
 import TopCard from '../TopCard'
@@ -57,11 +56,10 @@ const Analytics = () => {
           </div>
         ))}
       </div>
-      <div className="flex flex-col w-full gap-4 sm:gap-5 shadow-[0_0_10px_0_#54545440] 
-                py-4 px-4 sm:px-6 md:px-8 pb-6 sm:pb-10 rounded-xl">
+    <div className="flex flex-col w-full gap-6 bg-[#141517] border border-[#2d2f31] py-8 px-6 md:px-10 rounded-xl">
 
   <div className="flex items-center justify-start w-full">
-    <h1 className="text-[#000000] font-bold text-xl sm:text-2xl">
+    <h1 className="text-[#FFFFFF] font-bold text-xl sm:text-2xl">
       My Completion Progress
     </h1>
   </div>
@@ -82,7 +80,7 @@ const Analytics = () => {
         label="FINISHED"
         fontSize={32}
         textSize={14}
-        textColor="#000000"
+        textColor="#FFFFFF"
         labelColor="#BEC3CE"
       />
     </div>
@@ -102,5 +100,3 @@ const Analytics = () => {
 }
 
 export default Analytics
-
-
