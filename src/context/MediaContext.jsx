@@ -53,7 +53,7 @@ export const MediaProvider = ({ children }) => {
     if (!localStream) return;
 
     toggleAudioTrack(localStream, !isMicOn);
-    setIsMicOn((prev) => !prev);
+    setIsMicOn(prev => !prev);
   };
 
   // 📷 Toggle Camera
@@ -63,7 +63,7 @@ export const MediaProvider = ({ children }) => {
     if (!localStream) return;
 
     toggleVideoTrack(localStream, !isCameraOn);
-    setIsCameraOn((prev) => !prev);
+    setIsCameraOn(prev => !prev);
   };
 
   // 🖥 Start Screen Share

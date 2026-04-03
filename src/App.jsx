@@ -3,6 +3,7 @@ import { Provider, useDispatch, useSelector } from "react-redux";
 import { store } from "./redux/store";
 import MainLayout from "./layouts/MainLayout";
 
+import CoAdmin from "./pages/CoAdmin";
 import Projects from "./pages/Projects";
 import Tasks from "./pages/Tasks";
 import CurrentMeet from "./pages/CurrentMeet";
@@ -81,6 +82,14 @@ export default function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/meet/:id" element={<CurrentMeet />} />
 
+          <Route
+               path="/co-admin"
+               element={
+              <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
+              <CoAdmin />
+              </MainLayout>
+              }
+                 />
           {/* User dashboard with a different Topbar */}
           <Route
             path="/user-dashboard"

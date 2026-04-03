@@ -262,7 +262,7 @@ const FlowbitMeetingPage = () => {
       <ControlBar
         controllerRef={controllerRef}
         isDarkTheme={isDarkTheme}
-        isMicOn={isCameraOn}
+        isMicOn={isMicOn}
         isCameraOn={isCameraOn}
         toggleCamera={toggleCamera}
         toggleMic={toggleMic}
