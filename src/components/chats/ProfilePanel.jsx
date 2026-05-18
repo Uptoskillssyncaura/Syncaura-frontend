@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, Dot } from "lucide-react";
 import { IoDocumentText } from "react-icons/io5";
+import FilePreview from "./FilePreview";
 
 export default function ProfilePanel({
   isOpen,
@@ -89,28 +90,13 @@ export default function ProfilePanel({
 
                 <div className="flex flex-col gap-3 px-4">
                   {files.map((file, idx) => (
-                    <div
+                    <FilePreview
                       key={idx}
-                      className="flex items-center gap-3 px-2 py-1 border rounded-xl border-[#989696] dark:border-[#989696]"
-                    >
-                      <IoDocumentText className="size-10 fill-gray-700 dark:fill-gray-300" />
-
-                      <div className="flex flex-col gap-0.5">
-                        <h1 className="text-sm text-[#222222] dark:text-[#FFFFFF]">
-                          {file.name}
-                        </h1>
-
-                        <div className="flex items-center justify-center gap-2">
-                          <p className="text-[#989696] text-xs">{file.size}</p>
-                          <div className="flex items-center justify-center">
-                            <Dot className="text-[#989696] text-xl" />
-                            <span className="text-[#989696] text-xs">
-                              {file.date}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                      fileUrl={file.url || ""}
+                      fileName={file.name}
+                      fileSize={file.size}
+                      fileDate={file.date}
+                    />
                   ))}
                 </div>
               </div>

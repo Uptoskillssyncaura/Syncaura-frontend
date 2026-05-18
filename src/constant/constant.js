@@ -20,8 +20,8 @@ export const CHATS = [
       location: "San Francisco, CA",
     },
     files: [
-      { name: "ui_notes.txt", size: "1.2 MB", date: "Dec 10" },
-      { name: "components.png", size: "820 KB", date: "Dec 09" },
+      { name: "ui_notes.txt", size: "1.2 MB", date: "Dec 10", url: "https://www.w3.org/TR/PNG/iso_8859-1.txt" },
+      { name: "components.png", size: "820 KB", date: "Dec 09", url: "https://via.placeholder.com/800x600.png?text=Components+Design" },
     ], isArchived: true ,
   },
 
@@ -69,8 +69,8 @@ export const CHATS = [
       location: "Pune, India",
     },
     files: [
-      { name: "wireframe.fig", size: "2.8 MB", date: "Dec 14" },
-      { name: "colors.pdf", size: "620 KB", date: "Dec 13" },
+      { name: "wireframe.fig", size: "2.8 MB", date: "Dec 14", url: "https://example.com/wireframe.fig" },
+      { name: "colors.pdf", size: "620 KB", date: "Dec 13", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" },
     ], isArchived: true 
   },
 
