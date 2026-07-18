@@ -56,10 +56,8 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if (!user) {
-      dispatch(fetchUserProfile());
-    }
-  }, [dispatch, user]);
+    dispatch(fetchUserProfile());
+  }, [dispatch]);
 
   useEffect(() => {
     if (!user) return;

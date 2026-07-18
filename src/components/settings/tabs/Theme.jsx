@@ -58,6 +58,13 @@ const Theme = () => {
     document.documentElement.setAttribute("data-fontsize", fontSize);
   }, [fontSize]);
 
+  useEffect(() => {
+    document.documentElement.style.zoom = `${zoom}%`;
+    return () => {
+      document.documentElement.style.zoom = "";
+    };
+  }, [zoom]);
+
   const handleThemeChange = (e) => {
     const val = e.target.value.toLowerCase();
     dispatch(setUiTheme(val));
@@ -162,7 +169,7 @@ const Theme = () => {
 
             <SettingRow label={t("fontSize")} value={fontSize}>
               <select
-                value={fontSize}
+                value={{ small: "Small", medium: "Medium", large: "Large", xlarge: "Extra Large" }[fontSize] || "Medium"}
                 onChange={handleFontSizeChange}
                 className="bg-white dark:bg-[#0B0B0B] text-black dark:text-white border border-gray-300 dark:border-[#2A2A2A] px-3 py-1 rounded-md"
               >

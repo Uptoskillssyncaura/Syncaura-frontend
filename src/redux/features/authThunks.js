@@ -39,8 +39,7 @@ export const refreshAccessToken = createAsyncThunk(
       const res = await api.post("/auth/refresh", { refreshToken });
 
       return res.data;
-    } catch (err) {
-      console.log(err);
+    } catch {
       return rejectWithValue("Session expired");
     }
   }

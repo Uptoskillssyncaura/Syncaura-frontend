@@ -2,9 +2,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { changePassword } from "../../../redux/features/authThunks";
 
 const ChangePasswordModal = ({ onClose }) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.auth);
 
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -16,7 +21,7 @@ const ChangePasswordModal = ({ onClose }) => {
 
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -35,12 +40,16 @@ const ChangePasswordModal = ({ onClose }) => {
       return;
     }
 
-    alert(t("passwordChangedSuccess"));
-
-    setCurrentPassword("");
-    setNewPassword("");
-    setConfirmPassword("");
-    onClose();
+    try {
+      await dispatch(changePassword({ currentPassword, newPassword })).unwrap();
+      toast.success(t("passwordChangedSuccess"));
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+      onClose();
+    } catch (requestError) {
+      setError(requestError || "Unable to change password");
+    }
   };
 
   return (
@@ -117,9 +126,10 @@ const ChangePasswordModal = ({ onClose }) => {
 
               <button
                 type="submit"
+                disabled={isLoading}
                 className="flex-1 py-2.5 rounded-2xl bg-[#2461E6] text-lg text-white font-medium border border-[#2461E6] hover:bg-blue-100 hover:text-[#2461E6] dark:bg-[#73FBFD] dark:text-black dark:border-[#73FBFD] dark:hover:bg-gray-800 transition shadow-sm btn-hover"
               >
-                {t("saveChanges")}
+                {isLoading ? "Saving..." : t("saveChanges")}
               </button>
             </div>
           </form>

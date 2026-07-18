@@ -9,6 +9,9 @@ const Notifications = () => {
       <h2 className="text-xl font-semibold text-black dark:text-white mb-6">
         {t("notificationsTab")}
       </h2>
+      <p className="text-sm text-gray-500 dark:text-gray-400">
+        Notification preferences are not available yet. No preference is being saved from this page.
+      </p>
 
     </div>
   );

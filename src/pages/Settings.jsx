@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import Tab from "../components/settings/TabStyle";
 
 import Profile from "../components/settings/tabs/Profile";
@@ -11,7 +10,6 @@ import PrivacyData from "../components/settings/tabs/PrivacyData";
 
 const Settings = () => {
   const [currTab, setCurrTab] = useState("Profile");
-  const [direction, setDirection] = useState(0);
 
   const tabData = [
     { title: "Profile" },
@@ -23,10 +21,6 @@ const Settings = () => {
   ];
 
   const handleTabChange = (tab) => {
-    const currentIndex = tabData.findIndex(t => t.title === currTab);
-    const nextIndex = tabData.findIndex(t => t.title === tab);
-
-    setDirection(nextIndex > currentIndex ? 1 : -1);
     setCurrTab(tab);
   };
 
