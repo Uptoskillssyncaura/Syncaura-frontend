@@ -1,22 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap');
 
-* {
-    box-sizing: border-box
-}
-
-body {
-    margin: 0;
-    background: #061221;
-    color: #f6f9ff;
-    font-family: 'DM Sans', Arial, sans-serif
-}
-
 .page {
     min-height: 100vh;
     display: grid;
     place-items: center;
     padding: 24px;
-    background: radial-gradient(circle at 50% 5%, #0b1c36 0, #061321 53%, #04101d 100%)
+    background: radial-gradient(circle at 50% 5%, #0b1c36 0, #061321 53%, #04101d 100%);
+    color: #f6f9ff;
+    font-family: 'DM Sans', Arial, sans-serif;
+}
+
+.page * {
+    box-sizing: border-box;
 }
 
 .auth-card {
@@ -65,13 +60,13 @@ body {
     margin: 0 0 10px
 }
 
-h1 {
+.page h1 {
     font: 800 38px/1.1 Manrope, sans-serif;
     letter-spacing: -2px;
     margin: 0
 }
 
-h1 em {
+.page h1 em {
     color: #0876ff;
     font-style: normal
 }
@@ -198,6 +193,11 @@ h1 em {
     filter: brightness(1.1)
 }
 
+.submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .message {
     margin: 10px 0 -2px;
     text-align: center;
@@ -292,3 +292,11 @@ h1 em {
         font-size: 33px
     }
 }
+/* Spinner CSS */
+.spinner {
+  width: 24px;
+  height: 24px;
+  color: #fff;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }

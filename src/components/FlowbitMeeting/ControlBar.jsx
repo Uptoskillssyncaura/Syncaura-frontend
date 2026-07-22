@@ -269,7 +269,7 @@ const ControlBar = ({
           : isDarkTheme
             ? "bg-[#2E2F2F] text-[#FFFFFF]"
             : "bg-[#F8F8F8] text-[#000000]"
-      }`}
+      }}`}
           >
             {isMicOn ? <Mic size={22} /> : <MicOff size={22} />}
           </button>
@@ -283,7 +283,7 @@ const ControlBar = ({
           : isDarkTheme
             ? "bg-[#2E2F2F] text-[#FFFFFF]"
             : "bg-[#F8F8F8] text-[#000000]"
-      }`}
+      }}`}
           >
             {isCameraOn ? <Video size={22} /> : <VideoOff size={22} />}
           </button>
@@ -378,7 +378,6 @@ const ControlBar = ({
           )}
         </AnimatePresence>
       </div>
-    </div>
   );
 };
 

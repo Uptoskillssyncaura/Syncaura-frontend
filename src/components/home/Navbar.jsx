@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Sun, Moon, Home, Sparkles, CreditCard, Mail, LogIn, ArrowRight } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
 import { useNavigate, Link } from "react-router-dom";
 import { useDarkMode } from "../../hooks/useDarkMode";
 
@@ -52,69 +52,82 @@ const Navbar = () => {
       >
         <div className="gap-20 flex items-center">
           <div
-            className="text-2xl font-bold text-blue-600 dark:text-[#4FE6E6]"
+            className="text-2xl font-bold"
+            style={{ color: 'var(--accent-color)' }}
           >
             FLOWBIT
           </div>
 
-          <nav 
-            className="flex items-center gap-1 p-1.5 rounded-2xl"
-            style={{
-              background: "linear-gradient(145deg, rgba(128, 128, 128, 0.05) 0%, rgba(128, 128, 128, 0.01) 100%)",
-              border: "1px solid rgba(128, 128, 128, 0.15)",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.03)",
-              backdropFilter: "blur(10px)"
-            }}
-          >
+          <nav className="flex items-center gap-8">
             <a
               href="#home"
               onClick={(e) => scrollToSection(e, 'home')}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-300 group hover:bg-black/5 dark:hover:bg-white/5"
+              className="text-sm font-medium border-b-2 pb-1 transition-all"
               style={{
-                backgroundColor: activeSection === 'home' ? 'rgba(51, 102, 255, 0.1)' : '',
-                color: activeSection === 'home' ? 'var(--accent-color)' : 'var(--text-secondary)',
+                color:
+                  activeSection === 'home'
+                    ? 'var(--accent-color)'
+                    : 'var(--text-secondary)',
+                borderColor:
+                  activeSection === 'home'
+                    ? 'var(--accent-color)'
+                    : 'transparent',
               }}
             >
-              <Home className="w-4 h-4 transition-transform group-hover:scale-110" />
               Home
             </a>
 
             <a
               href="#features"
               onClick={(e) => scrollToSection(e, 'features')}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-300 group hover:bg-black/5 dark:hover:bg-white/5"
+              className="text-sm font-medium border-b-2 pb-1 transition-all"
               style={{
-                backgroundColor: activeSection === 'features' ? 'rgba(51, 102, 255, 0.1)' : '',
-                color: activeSection === 'features' ? 'var(--accent-color)' : 'var(--text-secondary)',
+                color:
+                  activeSection === 'features'
+                    ? 'var(--accent-color)'
+                    : 'var(--text-secondary)',
+                borderColor:
+                  activeSection === 'features'
+                    ? 'var(--accent-color)'
+                    : 'transparent',
               }}
             >
-              <Sparkles className="w-4 h-4 transition-transform group-hover:scale-110" />
               Features
             </a>
 
             <a
               href="#pricing"
               onClick={(e) => scrollToSection(e, 'pricing')}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-300 group hover:bg-black/5 dark:hover:bg-white/5"
+              className="text-sm font-medium border-b-2 pb-1 transition-all"
               style={{
-                backgroundColor: activeSection === 'pricing' ? 'rgba(51, 102, 255, 0.1)' : '',
-                color: activeSection === 'pricing' ? 'var(--accent-color)' : 'var(--text-secondary)',
+                color:
+                  activeSection === 'pricing'
+                    ? 'var(--accent-color)'
+                    : 'var(--text-secondary)',
+                borderColor:
+                  activeSection === 'pricing'
+                    ? 'var(--accent-color)'
+                    : 'transparent',
               }}
             >
-              <CreditCard className="w-4 h-4 transition-transform group-hover:scale-110" />
               Pricing
             </a>
 
             <a
               href="#contact"
               onClick={(e) => scrollToSection(e, 'contact')}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-300 group hover:bg-black/5 dark:hover:bg-white/5"
+              className="text-sm font-medium border-b-2 pb-1 transition-all"
               style={{
-                backgroundColor: activeSection === 'contact' ? 'rgba(51, 102, 255, 0.1)' : '',
-                color: activeSection === 'contact' ? 'var(--accent-color)' : 'var(--text-secondary)',
+                color:
+                  activeSection === 'contact'
+                    ? 'var(--accent-color)'
+                    : 'var(--text-secondary)',
+                borderColor:
+                  activeSection === 'contact'
+                    ? 'var(--accent-color)'
+                    : 'transparent',
               }}
             >
-              <Mail className="w-4 h-4 transition-transform group-hover:scale-110" />
               Contact
             </a>
           </nav>
@@ -134,19 +147,22 @@ const Navbar = () => {
           </button>
 
           <button
-            onClick={() => navigate("/sign-in")}
-            className="flex items-center gap-2 text-sm font-semibold transition-all hover:opacity-70 text-blue-600 dark:text-[#4FE6E6]"
+            onClick={() => navigate("/signin")}
+            className="text-sm font-medium hover:opacity-80 transition-opacity"
+            style={{ color: 'var(--accent-color)' }}
           >
-            <LogIn className="w-4 h-4" />
             Login
           </button>
 
           <button
-            onClick={() => navigate("/sign-up")}
-            className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-xl hover:-translate-y-0.5 transition-all duration-300 bg-blue-600 dark:bg-[#4FE6E6] text-white dark:text-gray-900 shadow-[0_4px_14px_0_rgba(51,102,255,0.39)] hover:shadow-[0_6px_20px_rgba(51,102,255,0.23)] dark:shadow-[0_4px_14px_0_rgba(79,230,230,0.39)] dark:hover:shadow-[0_6px_20px_rgba(79,230,230,0.23)]"
+            onClick={() => navigate("/signup")}
+            className="px-6 py-2 text-sm font-medium rounded-md hover:opacity-90 transition-opacity"
+            style={{
+              backgroundColor: "var(--accent-color)",
+              color: "var(--bg-primary)",
+            }}
           >
             Start Free
-            <ArrowRight className="w-4 h-4" />
           </button>
         </div>
       </div>
@@ -155,14 +171,19 @@ const Navbar = () => {
       <div className="md:hidden">
         <div className="flex items-center justify-between px-6 py-5">
           <div
-            className="text-[23px] font-bold tracking-tight text-blue-600 dark:text-[#4FE6E6]"
+            className="text-[23px] font-bold tracking-tight"
+            style={{ color: 'var(--text-primary)' }}
           >
             FLOWBIT
           </div>
 
           <button
-            onClick={() => navigate("/SignUp")}
-            className="px-4 py-1.5 text-sm font-semibold rounded-[10px] bg-blue-600 dark:bg-[#4FE6E6] text-white dark:text-gray-900"
+            onClick={() => navigate("/signup")}
+            className="px-4 py-1 text-sm font-medium rounded-[10px]"
+            style={{
+              backgroundColor: "var(--accent-color)",
+              color: "var(--bg-primary)",
+            }}
           >
             Start Free
           </button>

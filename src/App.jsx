@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider, useDispatch, useSelector } from "react-redux";
-import { store } from "./redux/store";
+// import { store } from "./redux/store";
 import MainLayout from "./layouts/MainLayout";
 import { lazy, Suspense, useEffect } from "react";
 
@@ -11,7 +11,7 @@ const Meetings = lazy(() => import("./pages/Meetings"));
 const Chat = lazy(() => import("./pages/Chat"));
 const Documents = lazy(() => import("./pages/Documents"));
 const UserDashboard = lazy(() => import("./pages/UserDashboard"));
-const Dashboard = lazy(() => import("./pages/Dashboard"));
+// const Dashboard = lazy(() => import("./pages/Dashboard"));
 const SignIn = lazy(() => import("./pages/SignIn"));
 const SignUp = lazy(() => import("./pages/SignUp"));
 const Complaints = lazy(() => import("./pages/Complaints"));
@@ -25,26 +25,26 @@ const AuthCallback = lazy(() => import("./pages/AuthCallback"));
 const GithubCallback = lazy(() => import("./pages/GithubCallback"));
 
 import Header from "./components/Meeting/Header/Header";
-import MobileSidebar from "./components/MobileSidebar";
+import MobileSidebar from "./components/navigation/MobileSidebar";
 
 import { ToastContainer, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { refreshAccessToken } from "./redux/features/authThunks";
-import { logout } from "./redux/slices/authSlice";
+import { refreshAccessToken, fetchUserProfile } from "./redux/features/authThunks";
+// import { logout } from "./redux/slices/authSlice";
 import { Loader } from "lucide-react";
 import ProtectRoute from "./RouteProtection/ProtectRoute";
 
 export default function App() {
   const dispatch = useDispatch();
   const isDark = useSelector((state) => state.theme.isDark);
-  const user = useSelector((state) => state.auth.user);
+  // const user = useSelector((state) => state.auth.user);
   const authChecking = useSelector((state) => state.auth.authChecking);
 
   useEffect(() => {
     dispatch(refreshAccessToken());
 
     // Backend connection test
-    fetch("/api/test")
+    fetch("/health")
       .then(async (res) => {
         if (!res.ok) {
           throw new Error(`HTTP Error: ${res.status}`);
@@ -107,9 +107,7 @@ export default function App() {
             <Route element={<ProtectRoute publicOnly />}>
               <Route path="/" element={<Home />} />
               <Route path="/signin" element={<SignIn />} />
-              <Route path="/sign-in" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/sign-up" element={<SignUp />} />
               <Route path="/auth/callback" element={<AuthCallback />} />
               <Route
                 path="/auth/github/callback"
