@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import {
   Facebook, Instagram, Linkedin, Youtube,
   Twitter, Send, Zap, ArrowRight,
@@ -206,9 +207,25 @@ const Footer = () => {
           <div>
             <ColHeading>Company</ColHeading>
             <ul className="space-y-3">
-              {['About us', 'Blog', 'Careers', 'Press kit', 'Contact', 'Partners'].map(item => (
-                <NavLink key={item}>{item}</NavLink>
-              ))}
+              {['About us', 'Blog', 'Careers', 'Press kit', 'Contact', 'Partners'].map(item => {
+                if (item === 'About us') {
+                  return (
+                    <li key={item}>
+                      <Link to="/about">
+                        <motion.span
+                          whileHover={{ x: 4 }}
+                          className="flex items-center gap-1.5 text-sm cursor-pointer group transition-colors duration-200"
+                          style={{ color: 'var(--text-secondary)' }}
+                        >
+                          <ArrowRight size={11} className="opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#6366f1' }} />
+                          <span className="group-hover:text-indigo-400 transition-colors">{item}</span>
+                        </motion.span>
+                      </Link>
+                    </li>
+                  );
+                }
+                return <NavLink key={item}>{item}</NavLink>;
+              })}
             </ul>
           </div>
 

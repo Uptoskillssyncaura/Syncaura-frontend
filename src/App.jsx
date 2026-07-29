@@ -21,6 +21,7 @@ const Settings = lazy(() => import("./pages/Settings"));
 const Admin = lazy(() => import("./pages/Admin"));
 const CoAdmin = lazy(() => import("./pages/CoAdmin"));
 const Home = lazy(() => import("./pages/Home"));
+const AboutUs = lazy(() => import("./pages/AboutUs"));
 const AuthCallback = lazy(() => import("./pages/AuthCallback"));
 const GithubCallback = lazy(() => import("./pages/GithubCallback"));
 
@@ -110,6 +111,7 @@ export default function App() {
               <Route path="/sign-in" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/sign-up" element={<SignUp />} />
+              <Route path="/about" element={<AboutUs />} />
               <Route path="/auth/callback" element={<AuthCallback />} />
               <Route
                 path="/auth/github/callback"
