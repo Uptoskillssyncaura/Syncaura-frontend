@@ -1,9 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion"
-import { FileText, X } from "lucide-react"
+import { FileText, Pencil, X } from "lucide-react"
 import MotionSelect from "../projects/Model/MotionSelect"
 import { Controller, useForm } from "react-hook-form"
 
-const LeaveModel = ({ onClose, setLeaveData }) => {
+const LeaveModel = ({ onClose, setLeaveData, editData = null, editIndex = null }) => {
+
+    const isEditMode = editData !== null && editIndex !== null;
 
     const leaveTypes = [
         "Casual",
@@ -22,6 +24,20 @@ const LeaveModel = ({ onClose, setLeaveData }) => {
         "Festival"
     ];
 
+    // Build default values: if editing, pre-fill from editData
+    const getDefaultValues = () => {
+        if (isEditMode) {
+            return {
+                leaveType: editData.type || "Casual",
+                startDate: editData.startDate ? editData.startDate.split("T")[0] : "",
+                endDate: editData.endDate ? editData.endDate.split("T")[0] : "",
+                reason: editData.reason || "",
+            };
+        }
+        return {
+            leaveType: "Casual",
+        };
+    };
 
     const {
         register,
@@ -30,9 +46,7 @@ const LeaveModel = ({ onClose, setLeaveData }) => {
         watch,
         formState: { errors },
     } = useForm({
-        defaultValues: {
-            leaveType: "Casual",
-        },
+        defaultValues: getDefaultValues(),
     });
     const startDate = watch("startDate");
     const today = new Date().toISOString().split("T")[0];
@@ -43,10 +57,18 @@ const LeaveModel = ({ onClose, setLeaveData }) => {
             endDate: new Date(`${data["endDate"]}T00:00:00Z`).toISOString(),
             type: data["leaveType"] || "Casual",
             reason: data["reason"],
-            status: "Pending"
+            status: isEditMode ? editData.status : "Pending"
         }
         if (typeof setLeaveData === "function") {
-            setLeaveData((prev) => [currData, ...prev]);
+            if (isEditMode) {
+                // Update existing item at editIndex
+                setLeaveData((prev) =>
+                    prev.map((item, idx) => (idx === editIndex ? currData : item))
+                );
+            } else {
+                // Add new item
+                setLeaveData((prev) => [currData, ...prev]);
+            }
         }
 
 
@@ -88,8 +110,14 @@ const LeaveModel = ({ onClose, setLeaveData }) => {
                     {/* Close */}
                     <div className="flex items-center justify-between w-full ">
                         <div className="flex items-center justify-center gap-3  ">
-                            <FileText className="size-6 text-[#000000] dark:text-[#FFFFFF]" />
-                            <h1 className="text-2xl font-medium text-[#000000] dark:text-[#F8F8F8]" >Apply Leave</h1>
+                            {isEditMode ? (
+                                <Pencil className="size-6 text-[#000000] dark:text-[#FFFFFF]" />
+                            ) : (
+                                <FileText className="size-6 text-[#000000] dark:text-[#FFFFFF]" />
+                            )}
+                            <h1 className="text-2xl font-medium text-[#000000] dark:text-[#F8F8F8]" >
+                                {isEditMode ? "Edit Leave" : "Apply Leave"}
+                            </h1>
                         </div>
                         <button
                             onClick={onClose}
@@ -109,7 +137,7 @@ const LeaveModel = ({ onClose, setLeaveData }) => {
                                     control={control}
                                     rules={{ required: "Leave type is required" }}
                                     render={({ field }) => (
-                                        <MotionSelect {...field} startVal="Casual" options={leaveTypes} />
+                                        <MotionSelect {...field} startVal={isEditMode ? editData.type : "Casual"} options={leaveTypes} />
                                     )}
                                 />
                                 {errors.leaveType && (
@@ -192,7 +220,9 @@ const LeaveModel = ({ onClose, setLeaveData }) => {
                         </div>
                         <div className="flex items-center justify-center mt-5 w-full">
                             <button type="submit" className="flex cursor-pointer items-center justify-center bg-[#2461E6] dark:bg-[#73FBFD] px-7 py-2 rounded-4xl btn-hover">
-                                <p className="dark:text-[#2E2F2F] text-[#FFFFFF] text-lg font-medium" >Apply Leave</p>
+                                <p className="dark:text-[#2E2F2F] text-[#FFFFFF] text-lg font-medium" >
+                                    {isEditMode ? "Update Leave" : "Apply Leave"}
+                                </p>
                             </button>
                         </div>
 
