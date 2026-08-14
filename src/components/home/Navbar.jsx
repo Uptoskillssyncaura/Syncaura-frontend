@@ -147,12 +147,22 @@ const Navbar = () => {
             FlowBit
           </div>
 
-          <button
-            onClick={() => navigate("/SignUp")}
-            className="px-4 py-1.5 text-sm font-semibold rounded-[10px] bg-blue-600 dark:bg-[#4FE6E6] text-white dark:text-gray-900"
-          >
-            Start Free
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => navigate("/sign-in")}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold transition-all hover:opacity-70 text-blue-600 dark:text-[#4FE6E6]"
+            >
+              <LogIn className="w-4 h-4" />
+              Login
+            </button>
+
+            <button
+              onClick={() => navigate("/sign-up")}
+              className="px-4 py-1.5 text-sm font-semibold rounded-[10px] bg-blue-600 dark:bg-[#4FE6E6] text-white dark:text-gray-900"
+            >
+              Start Free
+            </button>
+          </div>
         </div>
 
         <div className="flex justify-center px-4 py-5 pb-3">
